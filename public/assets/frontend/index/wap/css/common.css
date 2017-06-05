@@ -1,0 +1,477 @@
+.user_login{
+    width:0.44rem;
+    height:0.44rem;
+    background: url(../img/icon.png) no-repeat -0.8rem 0;
+    background-size: 6.4rem;
+    position: absolute;
+    top:0.25rem;
+    right: 0.4rem;
+}
+
+*{ margin:0; padding:0; box-sizing: border-box;}
+body { background:#fff; font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif; font-size:12px;overflow-x:hidden;overflow-y:auto;position:relative;}
+a { text-decoration:none; color:#333;}
+img { border:0; outline:none;}
+ul,ol { list-style:none;}
+p { list-style:none;}
+input { outline:none;}
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+i { font-style:normal;}
+br { width:0; height:0; clear:both; overflow:hidden;}
+b { font-weight:normal;}
+.clearfix:after{ display:block; content:'';  clear:both;}
+.clearfix{zoom:1;}
+.fl{ float:left;}
+.fr{ float:right;}
+input {outline:medium;}
+input::-webkit-input-placeholder{
+    color: #999;
+}    /* 使用webkit内核的浏览器 */
+input:-moz-placeholder{
+    color: #999;
+}                  /* Firefox版本4-18 */
+input::-moz-placeholder{
+    color: #999;
+}                  /* Firefox版本19+ */
+input:-ms-input-placeholder{
+    color: #999;
+}
+
+
+.bfc{
+    overflow: hidden;
+}
+a,div,input,p{-webkit-tap-highlight-color:rgba(255,0,0,0);}
+.none{
+    display:none;
+}
+em{
+    font-style: normal;
+}
+body{
+    position: relative;
+}
+/*--------------头部-------------*/
+.head{
+    width:7.5rem;
+    height:1rem;
+    line-height: 1rem;
+    text-align: center;
+    position: fixed;
+    background: #fff;
+    z-index: 1001;
+}
+/*Android*/
+  .head {
+      position: fixed;
+      z-index: 1001;
+  }
+/*iOS*/
+  .head {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      left: 0;
+      z-index: 1001;
+  }
+.headhead{
+    width:7.5rem;
+    height:1rem;
+    position: relative;
+}
+.coordinate{
+    position: absolute;
+    width: 0.32rem;
+    height:0.4rem;
+    display: inline-block;
+    background: url(../img/icon.png) no-repeat 0 0;
+    background-size: 6.4rem;
+    left: 0.4rem;
+    top: 0.26rem;
+}
+.head span{
+    position: absolute;
+    font-size: 0.3rem;
+    color:#333;
+    top:0;
+    left:0.9rem;
+}
+.head .logo{
+    width:1.3rem;
+    height:0.32rem;
+    display: inline-block;
+    background: url(../img/icon.png) no-repeat -4rem -0.8rem;
+    background-size: 6.4rem;
+    margin-top: 0.35rem;
+}
+.head ._user,.head .user{
+    width:0.44rem;
+    height:0.44rem;
+    /*display: inline-block;*/
+    background: url(../img/icon.png) no-repeat -0.8rem 0;
+    background-size: 6.4rem;
+    position: absolute;
+    top:0.25rem;
+    right: 0.4rem;
+    z-index: 10000;
+}
+.head .wode{
+    width:0.44rem;
+    height:0.44rem;
+    /*background: red;*/
+    position: absolute;
+    right: 0.4rem;
+    top:0.25rem;
+}
+/*----------------商品列表-------------*/
+.shop_list{
+    padding:0 0.42rem;
+}
+.shop_list .list_detail{
+    padding-top: 0.42rem;
+    border-bottom: 1px solid #e5e5e5;
+    overflow: hidden;
+}
+.shop_list .list_detail .img{
+    width:2.4rem;
+    height:1.8rem;
+    float: left;
+}
+.shop_list .list_detail .img img{
+    width:2.4rem;
+    height:1.8rem;
+}
+.shop_list .list_detail .detail_mess{
+    width:4.06rem;
+    height:1.8rem;
+    margin-left: 2.64rem;
+    /*overflow: hidden;*/
+}
+.shop_list .list_detail .detail_mess .mess_class{
+    font-size: 0.24rem;
+    color: #333;
+}
+.shop_list .list_detail .detail_mess .mess_kind{
+    font-size: 0.3rem;
+    color: #555;
+    font-weight: 900;
+}
+.shop_list .list_detail .detail_mess .mess_peo{
+    margin:0.12rem 0;
+}
+.shop_list .list_detail .detail_mess .mess_people{
+    font-size: 0.3rem;
+    color: #333;
+}
+.shop_list .list_detail .detail_mess .mess_area{
+    font-size: 0.3rem;
+    color: #333;
+    display: block;
+    float: left;
+    width: 1rem;
+    height: 0.34rem;
+    margin-top: 0.1rem;
+}
+.shop_list .list_detail .detail_mess .mess_money{
+    font-size: 0.42rem;
+    color: #f9ae32;
+    float: right;
+    /*margin-top:-0.12rem;*/
+}
+/*.shop_list .list_detail .detail_mess .mess_mon{*/
+    /*!*margin-top: -0.16rem;*!*/
+    /*width:100%;*/
+    /*height:0.34rem;*/
+/*}*/
+.shop_list .list_detail .detail_mess .mess_money .mess_each{
+    font-size: 0.3rem;
+    color: #333;
+    margin-left: 0.1rem;
+}
+.shop_list .list_detail .detail_near{
+    width:100%;
+    height:0.9rem;
+    padding-top:0.1rem;
+    clear: both;
+}
+.shop_list .list_detail .detail_near i{
+    width: 0.18rem;
+    height:0.22rem;
+    display: inline-block;
+    background: url(../img/icon.png) no-repeat -4rem 0;
+    background-size: 6.4rem;
+    margin-top: 0.12rem;
+}
+.shop_list .list_detail .detail_near .detail_addr{
+    float: left;
+    margin-right: 0.9rem;
+    padding-top: 0.1rem;
+}
+.shop_list .list_detail .detail_near .detail_addr i{
+    float:left;
+}
+.shop_list .list_detail .detail_near .detail_addr span{
+    display: inline-block;
+    margin: 0.07rem 0 0 0.06rem;
+    float: left;
+    font-size: 0.24rem;
+    color: #666;
+}
+.shop_list .list_detail .detail_near .near{
+    float:left;
+    color:#666;
+    font-size:0.24rem;
+    padding: 0.04rem 0.1rem;
+    border: 1px solid #666;
+    border-radius: 0.05rem;
+    margin:0.1rem 0.12rem 0 0;
+}
+/*-------------------登录-----------------*/
+.login_page .login_content{
+    width: 100%;
+    height:12.34rem;
+    padding:0 0.9rem;
+    border-top:1px solid #e1e1e1;
+    /*margin-top: 1rem;*/
+}
+/*.login_page .login_content .login form{*/
+/*width:512px;*/
+/*height:210px;*/
+/*margin:-75px -42px 0;*/
+/*color:#666;*/
+/*transform: scale(0.5);*/
+/*transform-origin:center;*/
+/*}*/
+.login_page .login_content form h4{
+    width:100%;
+    height:2.16rem;
+    font-size: 0.36rem;
+    line-height: 2.16rem;
+    text-align: center;
+    color:#333;
+}
+.login_page .login_content form .phoneNumber{
+    width:5.7rem;
+    height:0.9rem;
+    /*background: #eaeaea;*/
+    border-radius: 0.05rem;
+    margin-bottom:0.6rem;
+    border:1px solid #e1e1e1;
+}
+.login_page .login_content form .phoneNumber span{
+    display: inline-block;
+    width: 0.3rem;
+    height: 0.42rem;
+    background: url(../img/icon.png) no-repeat 0 -0.8rem;
+    background-size: 6.4rem;
+    margin:0.24rem 0 0 0.2rem;
+}
+.login_page .login_content form .phoneNumber input{
+    border:0;
+    float:right;
+    width:4.9rem;
+    height:0.9rem;
+    background: transparent;
+    line-height:0.9rem;
+    font-size:0.3rem;
+    color:#333;
+}
+.login_page .login_content form .phoneNumber input::-webkit-input-placeholder,.login_page .login_content form .verificationCode input::-webkit-input-placeholder{
+    color: #666!important;
+}
+.login_page .login_content form .verifica{
+    width:5.7rem;
+    height:0.9rem;
+}
+.login_page .login_content form .verificationCode {
+    width:3.6rem;
+    height:0.9rem;
+    /*background: #eaeaea;*/
+    border-radius: 0.05rem;
+    border:1px solid #e1e1e1;
+    float: left;
+}
+.login_page .login_content form .verificationCode span{
+    display: inline-block;
+    width: 0.34rem;
+    height: 0.38rem;
+    background: url(../img/icon.png) no-repeat -0.8rem -0.8rem;
+    background-size: 6.4rem;
+    margin:0.26rem 0 0 0.2rem;
+}
+.login_page .login_content form .verificationCode input{
+    border:0;
+    float:right;
+    width:2.8rem;
+    height:0.9rem;
+    background: transparent;
+    line-height:0.9rem;
+    font-size:0.3rem;
+}
+.login_page .login_content form .send{
+    width: 1.8rem;
+    height:0.9rem;
+    background: #083680;
+    float: right;
+    border-radius: 0.05rem;
+    text-align: center;
+    line-height: 0.9rem;
+    color: #fff;
+    font-size: 0.3rem;
+}
+.login_page .login_content form .rightNow{
+    width: 5.7rem;
+    height:0.9rem;
+    background: #083680;
+    margin:0.6rem 0 0.42rem 0;
+    border-radius: 0.05rem;
+    text-align: center;
+    line-height: 0.9rem;
+}
+.login_page .login_content form .rightNow a{
+    color: #fff;
+    font-size: 0.3rem;
+}
+.login_page .login_content form p{
+    font-size: 0.3rem;
+    /*margin-bottom: 30px;*/
+}
+.login_page .login_content form p a{
+    color: #083680;
+}
+.login_page .login_content form .login_text{
+    line-height: 0.9rem;
+}
+/*------协议-----*/
+.agreement .head .coordinate{
+    position: absolute;
+    width: 0.2rem;
+    height: 0.4rem;
+    display: inline-block;
+    background: url(../img/icon.png) no-repeat -5.6rem -0.8rem;
+    background-size: 6.4rem;
+    left: 0.4rem;
+    top: 0.26rem;
+}
+.agreement .agreement_content{
+    width: 100%;
+    height:12.34rem;
+    padding:0 0.4rem;
+    border-top:1px solid #e1e1e1;
+}
+.agreement .agreement_content h4{
+    width:100%;
+    height:2.16rem;
+    font-size: 0.36rem;
+    line-height: 2.16rem;
+    text-align: center;
+    color:#333;
+}
+.agreement .agreement_content .agreement_detail{
+    color:#666;
+    font-size:0.24rem;
+    line-height:0.34rem;
+}
+/*//我的订阅*/
+.mine .head .coordinate{
+    position: absolute;
+    width: 0.5rem;
+    height: 0.5rem;
+    display: inline-block;
+    background: url(../img/icon.png) no-repeat -5.6rem -0.8rem;
+    background-size: 6.4rem;
+    left: 0.4rem;
+    top: 0.26rem;
+}
+.mine{
+    position: absolute;
+    top:0;
+    left:0;
+    background: #fff;
+}
+.mine .my_content{
+    width:100%;
+    height:12.34rem;
+    background: #f5f5f5;
+    padding:0 0.4rem;
+    border-top:1px solid #e1e1e1;
+}
+.mine .my_content ._my{
+    width:6.7rem;
+    height:1.02rem;
+    background: #fff;
+    border-radius: 0.1rem;
+    margin-top:0.6rem;
+    line-height:1.02rem;
+}
+.mine .my_content ._my em{
+    font-size: 0.36rem;
+    color:#333;
+}
+.mine .my_content .my_collect span{
+    width: 0.4rem;
+    height: 0.4rem;
+    display: block;
+    float: left;
+    background: url(../img/icon.png) no-repeat -2.4rem -0.8rem;
+    background-size: 6.4rem;
+    margin: 0.34rem 0.3rem 0;
+}
+.mine .my_content .my_order span{
+    width: 0.42rem;
+    height: 0.42rem;
+    display: block;
+    float: left;
+    background: url(../img/icon.png) no-repeat -3.2rem -0.8rem;
+    background-size: 6.4rem;
+    margin: 0.34rem 0.3rem 0;
+}
+.mine .my_content ._my i{
+    width: 0.26rem;
+    height: 0.42rem;
+    display: block;
+    float: right;
+    background: url(../img/icon.png) no-repeat -1.6rem -0.8rem;
+    background-size: 6.4rem;
+    margin: 0.34rem 0.3rem 0;
+}
+.mine .my_content .my_back{
+    width: 5.7rem;
+    height:0.8rem;
+    background: #999;
+    line-height: 0.8rem;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 0.05rem;
+    color:#fff;
+    font-size: 0.3rem;
+    position: absolute;
+    bottom: 1.82rem;
+    left:12%;
+}
+/*--------------------要改变样式的（加类名的方式）------------------*/
+/*.mold_boxp{*/
+    /*border: 1px solid #083680!important;*/
+    /*color: #083680!important;*/
+/*}*/
+html,body{margin:0;padding:0;}
+.abc{
+    position:fixed;
+    left:0;
+    right:0;
+    top:0;
+    position: -webkit-sticky;
+    position: sticky;
+}
+.cba{
+    position:relative;
+    left:0;
+    right:0;
+    top:0;
+    position: -webkit-sticky;
+    position: sticky;
+}

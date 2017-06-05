@@ -1,0 +1,555 @@
+.detail .detail_pic{
+    width: 7.5rem;
+    height: 5.63rem;
+    position: relative;
+}
+.detail img{
+    width: 7.5rem;
+    height: 5.63rem;
+}
+.detail_pic i{
+    width: 0.6rem;
+    height: 0.6rem;
+    display: block;
+    position: absolute;
+    background: url(../img/detailicon.png) no-repeat 0 0;
+    background-size: 4.5rem ;
+    right: 0.4rem;
+    top:0.3rem;
+    z-index:1000;
+}
+.detail_pic p{
+    width: 100%;
+    height: 0.8rem;
+    background: rgba(0,0,0,0.8);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 0.36rem;
+    line-height: 0.8rem;
+    color: #fff;
+    z-index: 1000;
+}
+.detail_pic p span{
+    color:#f9ae3a;
+}
+.detail_pic p span:nth-of-type(1){
+    margin:0 2rem 0 2.85rem;
+}
+.det_time{
+    width: 100%;
+    height: 1rem;
+    padding-left: 0.4rem;
+    font-size:0.28rem;
+    color:#666;
+    line-height: 1rem;
+    background: #fff;
+}
+.det_time p{
+    float:left;
+}
+.det_time p:last-child{
+    margin-left: 2.24rem;
+    color:#333;
+    font-size: 0.3rem;
+}
+.det_message{
+    width: 100%;
+    height: 1rem;
+    background: #f5f5f5;
+}
+.det_message li{
+    width: 3.75rem;
+    height: 1rem;
+    line-height: 1rem;
+    float: left;
+    text-align: center;
+    font-size: 0.3rem;
+    color: #333;
+}
+.det_message li:nth-of-type(1){
+    color: #083680;
+    border-bottom: 2px solid #083680;
+}
+/*----加样式---*/
+.yuan_li{
+    color: #333!important;
+    border-bottom: 2px solid #f5f5f5!important;
+}
+.det_li{
+    color: #083680!important;
+    border-bottom: 2px solid #083680!important;
+}
+.detail{
+    background: #f5f5f5;
+    position: relative;
+}
+.detail h4{
+    width: 100%;
+    height:1.16rem;
+    color:#333;
+    font-size: 0.36rem;
+    line-height: 1.16rem;
+    padding-left: 0.4rem;
+}
+.detail .jbxx{
+    background: #fff;
+    padding-bottom: 0.4rem;
+}
+.detail .jbxx>ul{
+    width: 100%;
+    height: 0.82rem;
+    line-height: 0.44rem;
+    text-align: center;
+    font-size: 0.24rem;
+    color:#666;
+}
+.detail .jbxx>ul li{
+    float: left;
+    width: 2.5rem;
+    height: 100%;
+    border-right: 1px solid #e5e5e5;
+}
+.detail .jbxx>ul li:last-child{
+    border: none;
+}
+.detail .jbxx>ul li:nth-of-type(1) p i{
+    color: #f9ae3a;
+    font-size: 0.4rem;
+}
+.detail .jbxx>ul li:nth-of-type(2) p i{
+    color: #333;
+    font-size: 0.28rem;
+}
+.detail .jbxx>ul li:nth-of-type(3) p i{
+    color: #333;
+    font-size: 0.28rem;
+}
+.detail .jbxx .det_domian,.detail .jbxx .det_buss,.detail .jbxx .det_do,.detail .jbxx .det_around,.detail .jbxx .det_cb,
+.jzxx .det_mi,.jzxx .det_ceng,.detail .zlxg .det_zl,.detail .zlxg .det_sy{
+    font-size: 0.3rem;
+    color: #666;
+    padding-left: 0.4rem;
+}
+.detail .jbxx .det_domian i,.detail .jbxx .det_buss i,.detail .jbxx .det_do i,.detail .jbxx .det_around i,
+.detail .jbxx .det_cb i,.jzxx .det_mi i,.jzxx .det_ceng i,.detail .zlxg .det_zl i,.detail .zlxg .det_sy i{
+    color: #333;
+}
+.detail .jbxx .det_domian{
+    margin: 0.4rem 0;
+}
+.detail .jbxx .det_do{
+    margin: 0.4rem 0 0.28rem 0;
+}
+.detail .jbxx .det_around{
+   overflow: hidden;
+}
+.detail .jbxx .det_around p:nth-of-type(1){
+    /*width: 1.3rem;*/
+    /*height: 100%;*/
+    float: left;
+}
+.detail .jbxx .det_around p:nth-of-type(2){
+    width: 5.6rem;
+    height: 100%;
+    float: left;
+}
+.detail .jbxx .det_around i{
+    display: inline-block;
+    padding: 0.1rem 0.34rem;
+    border: 1px solid #083680;
+    color: #083680;
+    border-radius: 0.05rem;
+    margin: 0 0.2rem 0.2rem 0;
+}
+.detail .jbxx .det_cb{
+    clear: both;
+    margin-top:0.2rem;
+}
+.detail .jbxx .det_cb i{
+    font-size: 0.3rem;
+    color:#333;
+}
+.detail .jbxx .det_cb span{
+    font-size: 0.36rem;
+    color:#083680;
+}
+.detail .jzxx{
+    margin-top: 0.3rem;
+    background: #fff;
+    overflow: hidden;
+    margin-bottom: 0.3rem;
+}
+.detail .jzxx .det_mi,.detail .jzxx .det_ceng{
+    float: left;
+}
+.detail .jzxx .det_mi p,.detail .jzxx .det_ceng p{
+    margin-bottom: 0.4rem;
+}
+.detail .jzxx .det_ceng{
+    margin-left:0.6rem;
+    padding-top: 0.75rem;
+}
+.detail .zlxg{
+    background: #fff;
+    margin-bottom: 0.3rem;
+    overflow: hidden;
+
+}
+.detail .zlxg .det_zl,.detail .zlxg .det_sy{
+    float: left;
+
+}
+.detail .zlxg .det_zl p,.detail .zlxg .det_sy p{
+    margin-bottom: 0.4rem;
+}
+.detail .zlxg .det_zl{
+    margin-right: 0.55rem;
+}
+.detail .gctj{
+    background: #fff;
+    margin-bottom: 0.3rem;
+}
+.detail .gctj{
+    background: #fff;
+    margin-bottom: 0.3rem;
+}
+.detail .dtxx{
+    background: #fff;
+    margin-bottom: 0.3rem;
+}
+.detail .footxx{
+    background: #fff;
+    position: relative;
+}
+.detail .gctj ._project{
+    width: 6.1rem;
+    height: 8.36rem;
+    margin: 0.2rem 0.65rem 0.4rem 0.76rem;
+}
+.detail .gctj ._project .pro{
+    width: 1.2rem;
+    height: 2.09rem;
+    float: left;
+    text-align: center;
+}
+.detail .gctj ._project .pro i{
+    display: inline-block;
+    width: 0.95rem;
+    height: 0.84rem;
+
+}
+.detail .gctj ._project .pro p{
+    margin:0.4rem 0 0.6rem 0;
+    color: #083680;
+    font-size: 0.3rem;
+    /*color:#666;*/
+}
+.detail .gctj ._project .pro:nth-of-type(3n+2){
+    margin: 0 1.25rem;
+}
+.detail .gctj ._project .pro:nth-of-type(1) i{
+    background: url("../img/detailicon.png") no-repeat 0.08rem -0.9rem;
+    /*background: url("../img/detailicon.png") no-repeat 0.08rem -3.6rem;*/
+    background-size: 4.5rem;
+}
+.detail .gctj ._project .pro:nth-of-type(2) i{
+    background: url("../img/detailicon.png") no-repeat -0.82rem -0.9rem;
+    /*background: url("../img/detailicon.png") no-repeat -0.82rem -3.6rem;*/
+    background-size: 4.5rem;
+}
+.detail .gctj ._project .pro:nth-of-type(3) i{
+    background: url("../img/detailicon.png") no-repeat -1.72rem -0.9rem;
+    /*background: url("../img/detailicon.png") no-repeat -1.72rem -3.6rem;*/
+    background-size: 4.5rem;
+}
+.detail .gctj ._project .pro:nth-of-type(4) i{
+    background: url("../img/detailicon.png") no-repeat -2.62rem -0.9rem;
+    /*background: url("../img/detailicon.png") no-repeat -2.62rem -3.6rem;*/
+    background-size: 4.5rem;
+}
+.detail .gctj ._project .pro:nth-of-type(5) i{
+    background: url("../img/detailicon.png") no-repeat 0.05rem -1.8rem;
+    /*background: url("../img/detailicon.png") no-repeat 0.05rem -4.5rem;*/
+    background-size: 4.5rem;
+}
+.detail .gctj ._project .pro:nth-of-type(6) i{
+    background: url("../img/detailicon.png") no-repeat -3.54rem -0.9rem;
+    /*background: url("../img/detailicon.png") no-repeat -3.54rem -3.6rem;*/
+    background-size: 4.5rem;
+}
+.detail .gctj ._project .pro:nth-of-type(7) i{
+    width: 0.8rem;
+    background: url("../img/detailicon.png") no-repeat -0.9rem -1.8rem;
+    /*background: url("../img/detailicon.png") no-repeat -0.9rem -4.5rem;*/
+    background-size: 4.5rem;
+}
+.detail .gctj ._project .pro:nth-of-type(8) i{
+    background: url("../img/detailicon.png") no-repeat -1.72rem -1.8rem;
+    /*background: url("../img/detailicon.png") no-repeat -1.72rem -4.5rem;*/
+    background-size: 4.5rem;
+}.detail .gctj ._project .pro:nth-of-type(9) i{
+     background: url("../img/detailicon.png") no-repeat -2.65rem -1.8rem;
+     /*background: url("../img/detailicon.png") no-repeat -2.65rem -4.5rem;*/
+     background-size: 4.52rem;
+ }
+.detail .gctj ._project .pro:nth-of-type(10) i{
+    background: url("../img/detailicon.png") no-repeat -3.52rem -1.8rem;
+    /*background: url("../img/detailicon.png") no-repeat -3.52rem -4.5rem;*/
+    background-size: 4.5rem;
+}
+.detail .gctj ._project .pro:nth-of-type(11) i{
+    background: url("../img/detailicon.png") no-repeat 0.06rem -2.64rem;
+    /*background: url("../img/detailicon.png") no-repeat -0.88rem -2.64rem;*/
+    background-size: 4.5rem;
+}
+.detail ._map{
+    width: 7.5rem;
+    height: 4.5rem;
+}
+.detail .footxx{
+    width: 100%;
+    height: 1.08rem;
+}
+.detail .footxx .footsc{
+    width: 2.3rem;
+    height: 1.08rem;
+    float: left;
+    line-height: 1.08rem;
+    font-size: 0.3rem;
+    color: #666;
+}
+.detail .footxx .footsc i{
+    width: 0.5rem;
+    height: 0.45rem;
+    display:inline-block;
+    background: url("../img/detailicon.png") no-repeat -0.9rem 0;
+    background-size: 4.5rem;
+    margin: 0.3rem 0 0 0.4rem;
+}
+.detail .footxx .footsc span{
+    margin-right: 0.6rem;
+    display: block;
+    float: right;
+}
+.marRight{
+    margin-right: 0.4rem!important;
+}
+.marBgt{
+    background: url("../img/detailicon.png") no-repeat -1.8rem 0!important;
+    background-size: 4.5rem!important;
+}
+.detail .footxx .footkc,.detail .footxx .footkd{
+    width: 2.6rem;
+    height: 1.08rem;
+    float: left;
+}
+.detail .footxx .footkc{
+    background: #f9ae3a;
+    color: #fff;
+    font-size: 0.36rem;
+}
+.detail .footxx .footkd{
+    background: #083680;
+    color: #fff;
+    font-size: 0.36rem;
+}
+.detail .footxx .footkc i{
+    width: 0.5rem;
+    height: 0.5rem;
+    display:inline-block;
+    background: url("../img/detailicon.png") no-repeat -2.7rem 0;
+    background-size: 4.5rem;
+    margin: 0.3rem 0 0 0.3rem;
+}
+.detail .footxx .footkc span{
+    margin:0.3rem 0.3rem 0 0;
+    display: block;
+    float: right;
+}
+.detail .footxx .footkd i{
+    width: 0.5rem;
+    height: 0.5rem;
+    display:inline-block;
+    background: url("../img/detailicon.png") no-repeat -3.6rem 0;
+    background-size: 4.5rem;
+    margin: 0.3rem 0 0 0.3rem;
+}
+.detail .footxx .footkd span{
+    margin:0.3rem 0.3rem 0 0;
+    display: block;
+    float: right;
+}
+
+.xx{
+    width: 100%;
+    min-height: 21.94rem;
+    position: relative;
+}
+.spjbxx{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+}
+.xsxsfx{
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    padding-top: 0.6rem;
+    position: absolute;
+    top:0;
+    left: 0;
+    display: none;
+}
+.xsxsfx .havedata{
+    padding-bottom: 0.4rem;
+}
+.xsxsfx .nodata{
+    width: 100%;
+    height: 5rem;
+    position: absolute;
+    top:0;
+    left: 0;
+    text-align: center;
+    padding-bottom: 0.4rem;
+}
+.xsxsfx .nodata i{
+    width: 1.5rem;
+    height: 1.2rem;
+    display: block;
+    background: url("../img/nodata.png") no-repeat;
+    background-size: 1.5rem;
+    margin: 2rem 3rem 0.6rem;
+}
+.xsxsfx .nodata p{
+    color: #666;
+    font-size: 0.24rem;
+}
+.xsxsfx h5:nth-of-type(1) i{
+    color: #f9ae3a;
+}
+.xsxsfx h5:nth-of-type(2){
+    margin:0.6rem 0 0.4rem 0.4rem;
+}
+.xsxsfx h5{
+    margin-left: 0.4rem;
+    font-size: 0.3rem;
+    color:#333;
+}
+.xsxsfx .fxreport{
+    margin:0 0 0.6rem 0.4rem;
+}
+.xsxsfx .fxreport h6{
+    font-size: 0.28rem;
+    color: #333;
+    font-weight: 100;
+}
+.xsxsfx .fxreport p{
+    font-size: 0.24rem;
+    color: #333;
+    margin:0.2rem 0 0.25rem 0;
+}
+.xsxsfx .fxreport p i{
+    color: #f9ae3a;
+    font-size: 0.24rem;
+}
+.xsxsfx .fxreport table{
+    width: 6.7rem;
+    height: 5.6rem;
+    border: 1px solid #d5d5d5;
+}
+.xsxsfx .fxreport table tr:nth-of-type(2n){
+    background: #fff;
+}
+.xsxsfx .fxreport table tr:nth-of-type(2n+1){
+    background: #f2f0f1;
+}
+.xsxsfx .fxreport table tr:nth-of-type(1){
+    background: rgba(8,54,128,0.3)
+}
+.xsxsfx .fxreport table th{
+    text-align: left;
+    color:#333;
+    font-size: 0.28rem;
+    padding-left: 0.3rem;
+}
+.xsxsfx .fxreport table tr td{
+    color:#666;
+    font-size: 0.28rem;
+    padding-left: 0.3rem;
+}
+
+.lxtel{
+    position: fixed;
+    width: 100%;
+    /* height: 100%; */
+    height: 12.5rem;
+    background: rgba(0,0,0,0.4);
+    /* top: -11.35rem; */
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+}
+.lxtel .lxcon{
+    width: 6.3rem;
+    height: 4.7rem;
+    background: #fff;
+    position: absolute;
+    left: 0.6rem;
+    bottom:4.3rem;
+    border-radius: 0.1rem;
+    padding: 0.4rem 0.5rem;
+}
+.lxtel .lxcon p{
+    width: 5.3rem;
+    height: 0.9rem;
+    border: 1px solid #666;
+    line-height: 0.9rem;
+    font-size: 0.3rem;
+    color: #666;
+    padding:0 0.2rem;
+    border-radius: 0.05rem;
+}
+.lxtel .lxcon p:nth-of-type(2){
+    margin: 0.6rem 0;
+    border: 1px solid #083680;
+}
+.lxtel .lxcon p:nth-of-type(3){
+    text-align: center;
+    background: #dcdcdc;
+    border: none;
+}
+.lxtel .lxcon p:nth-of-type(1) span{
+    margin:0 0.5rem;
+}
+.lxtel .lxcon p:nth-of-type(2) span{
+    margin:0 0.2rem 0 0.5rem;
+    color: #083680;
+}
+.lxtel .lxcon p:nth-of-type(2) i{
+    color: #083680;
+}
+
+.swiper-wrapper{
+   float: left;
+}
+.swiper-slide,.swiper-slide img{
+    width: 7.5rem;
+    height: 5.63rem;
+}
+
+.hadcollect,._hadcollect{
+    position: absolute;
+    width: 2.4rem;
+    height: 0.8rem;
+    background: #333;
+    color: #fff;
+    text-align: center;
+    line-height: 0.8rem;
+    border-radius: 0.05rem;
+    font-size: 0.3rem;
+    left: 2.55rem;
+    bottom: 6.2rem;
+    z-index: 1000;
+}

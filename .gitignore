@@ -1,0 +1,41 @@
+# laravel
+bootstrap/compiled.php
+vendor
+storage/debugbar
+# npm
+node_modules
+npm-debug.log
+# OS
+.DS_Store
+Thumbs.db
+vagrant
+.vagrant
+_ide_helper.php
+.phpstorm.meta.php
+# IDE
+.idea
+storage
+# Configuration
+/app/config/local
+/app/config/packages
+/app/config/prerelease
+/app/config/staging
+/app/config/production
+/app/config/release
+.env.*.php
+.env.php
+.env
+
+public/storage
+public/apidoc
+public/html
+public/packages
+public/uploads
+public/build
+/tasks/*.js
+/tasks/*.js.map
+#gulpfile.js
+gulpfile.js.map
+composer.lock
+log/capistrano.log
+
