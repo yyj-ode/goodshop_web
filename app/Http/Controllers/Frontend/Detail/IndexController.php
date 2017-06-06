@@ -96,4 +96,11 @@ class IndexController extends FrontendController
         return $shoplineModel;
     }
 
+    public function surround_information(Request $request){
+        $condition = 'ShopSurrounding';
+        $kilometer = 1;//距离该店铺周边多少千米范围内
+        $longitude = floatval($request->get('longitude',116));//为确保不报错，经纬度强转为浮点数
+        $latitude = floatval($request->get('latitude',40));//为确保不报错，经纬度强转为浮点数
+    }
+
 }
