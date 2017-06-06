@@ -158,4 +158,8 @@ class AccountController extends FrontendController
          * die();
          **/
     }
+    public function wxlogin(){
+        $url = "https://open.weixin.qq.com/connect/qrconnect?appid=wx973d59ef6e30eddb&redirect_uri=www.xuanpu100.com/%2Fwechat%2Faccount%2Fregister&response_type=code&scope=snsapi_login&state=STATE#wechat_redirect";
+        $il = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx973d59ef6e30eddb&redirect_uri=http%3A%2F%2Fwww.xuanpu100.com%2Fwechat%2Faccount%2Fregister&response_type=code&scope=snsapi_login&state=7d491f800ce67f44a5bc97ef26cbb536&connect_redirect=1#wechat_redirect';
+    }
 }

@@ -63,6 +63,9 @@ class IndexController extends FrontendController
             return view('Frontend.Index.CN.Wap.Index.index');
 
         } else {
+            $i =urlencode('www.xuanpu100.com/wechat/account/register');
+            dd($i);
+
             $subscribe = $this->subscribe(); //订阅和登录
             $user_login=$this->check_user();
             $price = $this->getPriceData();

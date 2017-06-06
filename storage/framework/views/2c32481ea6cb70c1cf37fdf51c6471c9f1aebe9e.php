@@ -112,7 +112,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="choice"><a href="###">开始选铺</a></div>
+
+                    <div class="choice" id="choice"><a href="###">开始选铺</a></div>
                 </form>
             </div>
         </div>
@@ -244,6 +245,7 @@
             $(".domain .erji2").html($(this).find("ul").html());
         });
         $(".domain").on("click",".erji2 li",function(){
+            $(".first").addClass("none");
             $(".erji2,.all2").addClass("none");
             $(".shop_choice2 i").html($(this).html());
         });
@@ -256,118 +258,6 @@
             $(this).parent().parent().parent().find(".yb_shop").find("i").html($(this).html());
             $(this).parent().parent().addClass("none");
         });
-
-
-//
-//        $(document).on("click",".first .erji2 li",function(){
-//            $(this).parent().parent().parent().find(".shop_choice2").find("i").html($(this).text());
-//            $(this).parent().parent().addClass("none");
-//        });
-
-
-
-
-
-
-        //        //点击选中显示
-//        $(document).on("click",".list .erji li",function(){
-//            //$(".domain i").text(($(this).text()));
-//            $(this).parent().parent().parent().find(".shop_choice1 input").val($(this).text());
-//            $(this).parent().parent().addClass("none");
-//            //$(this).parent().parent().css({"display":"none"});
-//
-//        });
-//        $(document).on("click",".first .erji li",function(){
-//            //$(".domain i").text(($(this).text()));
-//            $(this).parent().parent().parent().find(".shop_choice1").find("i").html($(this).text());
-//            $(this).parent().parent().addClass("none");
-//            //$(this).parent().parent().css({"display":"none"});
-//
-//        });
-
-
-
-
-
-        //        //点击出现筛选框
-//        $(document).on("click",".domain span",function(){
-//            $(".first, .third, .forth, .second").addClass("none");
-//            $(".domain .first").removeClass("none");
-//        });
-//        //鼠标划过出现二级联动
-//        $(".domain .all li").mouseenter(function(e){
-//            $(".domain .erji").removeClass("none");
-//            $(".domain .erji").html($(this).find("ul").html());
-//        });
-//        //点击选中显示
-//        $(document).on("click",".erji li",function(){
-//            $(".domain i").text(($(this).text()));
-//            $(".domain .first").addClass("none");
-//            var area_id = $(this).attr('value');
-//            $('#shop_area').val(area_id);
-//        });
-//        //鼠标移出
-//        // $(".first, .third, .forth, .second").mouseleave(function(e){
-//        //     alert(8)
-//        //     $(this).addClass("none");
-//        // });
-//
-//
-//        //点击出现筛选框2
-//        $(document).on("click",".type span",function(){
-//            $(".first, .third, .forth, .second").addClass("none");
-//            $(".second").removeClass("none");
-//
-//        });
-//        //点击选中显示
-//        $(document).on("click",".second ul li",function(){
-//            $(".type i").text(($(this).text()));
-//            $(".second").addClass("none");
-//
-//            var type = $(this).attr('value');
-//            $('#shop_type').val(type);
-//        });
-//        //鼠标移出
-//        /*$(".second").mouseleave(function(e){
-//         $(this).addClass("none");
-//         });*/
-//
-//        //点击出现筛选框3
-//        $(document).on("click",".area span",function(){
-//            $(".first, .third, .forth, .second").addClass("none");
-//            $(".third").removeClass("none");
-//        });
-//        //点击选中显示
-//        $(document).on("click",".third ul li",function(){
-//            $(".area i").text(($(this).text()));
-//            $(".third").addClass("none");
-//
-//            var min_area = $(this).attr('min');
-//            var max_area = $(this).attr('max');
-//            $('#min_area').val(min_area);
-//            $('#max_area').val(max_area);
-//        });
-//        //鼠标移出
-//        /*$(".third").mouseleave(function(e){
-//         $(this).addClass("none");
-//         });*/
-//
-//        //点击出现筛选框4
-//        $(document).on("click",".budget span",function(){
-//            $(".first, .third, .forth, .second").addClass("none");
-//            $(".forth").removeClass("none");
-//        });
-//        //点击选中显示
-//        $(document).on("click",".forth ul li",function(){
-//            $(".budget i").text(($(this).text()));
-//            $(".forth").addClass("none");
-//
-//            var min = $(this).attr('min');
-//            var max = $(this).attr('max');
-//            $('#min_rent').val(min);
-//            $('#max_rent').val(max);
-//
-//        });
 //        //鼠标移出
 
         layui.config({
@@ -439,7 +329,8 @@
         });
 
         
-        $('.choice').on('click',function(){
+
+        $('#choice').click(function(){
             //搜索条件
             var shop_area = $('#shop_area').val();
             var business_type = $('#shop_type').val();
