@@ -1,6 +1,6 @@
 <?php
 Route::group(['namespace' => 'Frontend\Order',  'prefix' => 'order'], function () {
-    Route::post('notify', 'PayController@notify');
+    Route::any('notify_url', 'PayController@notify_url');
     Route::post('pay', 'PayController@pay');
     Route::any('createQrcode', 'PayController@createQrcode');
     Route::get('success', 'PayController@success');
