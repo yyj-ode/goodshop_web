@@ -97,4 +97,29 @@ class SurroundNumStore extends BaseStore
         return $shopsurroundingModel::whereRaw($where)->count();
     }
 
+    /**
+     * 查找周边信息，给地图使用
+     * @param $longitude
+     * @param $latitude
+     * @param $kilometer
+     * @param $condition 周边的condition，字符串，可以ShopSurrounding，ShoppingCenter，VillageStore，OfficeBuilding
+     */
+    public static function getSurroundInformation($longitude,$latitude,$kilometer,$condition){
+        $shopsurroundingModel = new ShopSurrounding();
+        $where = [
+            'loc' => [
+                '$geoWithin' => [
+                    '$centerSphere' => [
+                        [
+                            $longitude,
+                            $latitude,
+                        ],
+                        $kilometer/6371
+                    ]
+                ]
+            ],
+        ];
+        return $shopsurroundingModel::whereRaw($where)->count();
+    }
+
 }
