@@ -89,6 +89,7 @@ return [
             'secret_key' => env('QINIU_SECRET_KEY'),  //SecretKey
             'bucket' => env('QINIU_BUCKET'),  //Bucket名字
             'notify_url' => env('QINIU_NOTIFY_URL'),  //持久化处理回调地址
+            'access'    => 'public'  //空间访问控制 public 或 private
         ],
     ],
 
