@@ -22,6 +22,6 @@ class VerifyCsrfToken extends BaseVerifier
         'admin/uploads/articleimg',
         'admin/uploads/screenshot',
         'admin/uploads/image',
-        'order/notify',
+        'order/notify_url',
     ];
 }

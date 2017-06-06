@@ -20,6 +20,7 @@ use App\WxPaypubconfig;
 use App\WxPayPubHelper;
 use App\SDKRuntimeException;
 use App\Library\CreateQueueAndSendMessage;
+use Log;
 
 /**
  * Class IndexController
@@ -36,7 +37,7 @@ class PayController extends FrontendController
     private $wxpayConfig;
     private $wxpay;
     public function __construct(){
-       // require('../app/Library/WxPayPubHelper/WxPayPubHelper.php');
+        // require('../app/Library/WxPayPubHelper/WxPayPubHelper.php');
 
         header("Content-type: text/html; charset=utf-8");
         require('../app/Library/Wxpay/jsapi/WxPaypubconfig.php');
@@ -45,12 +46,17 @@ class PayController extends FrontendController
             'SSLCERT_PATH' => '/app/Library/Vendor/Wxpay/jsapi/cacert/apiclient_cert.pem',        // 证书路径,注意应该填写绝对路径
             'SSLKEY_PATH' => '/app/Library/Vendor/Wxpay/jsapi/cacert/apiclient_key.pem',          // 证书路径,注意应该填写绝对路径
             'CURL_TIMEOUT' => 30,
-            'NOTIFYURL' =>'http://web.nndeal.app/index.php/Home/order/bxxy_notify/'
+            'NOTIFYURL' =>'http://www.xuanpu100.com/order/notify_url'
         );
-        $this->wxpayConfig['APPID'] = 'wx29c4db473ac5eee7';      // 微信公众号身份的唯一标识
-        $this->wxpayConfig['APPSECRET'] = 'bb5895a3097988954e6c638005386e70'; // JSAPI接口中获取openid
-        $this->wxpayConfig['MCHID'] ='1366037102';     // 受理商ID
-        $this->wxpayConfig['SKEY'] = 'tilifangtilifangtilifangtilifang';
+        /* $this->wxpayConfig['APPID'] = 'wx29c4db473ac5eee7';      // 微信公众号身份的唯一标识
+         $this->wxpayConfig['APPSECRET'] = 'bb5895a3097988954e6c638005386e70'; // JSAPI接口中获取openid
+         $this->wxpayConfig['MCHID'] ='1366037102';     // 受理商ID
+         $this->wxpayConfig['SKEY'] = 'tilifangtilifangtilifangtilifang';*/
+
+        $this->wxpayConfig['APPID'] = 'wx5ee7d59d3f67d498';      // 微信公众号身份的唯一标识
+        $this->wxpayConfig['APPSECRET'] = 'c37ab2436192743a9ee4e911cbc7552a'; // JSAPI接口中获取openid
+        $this->wxpayConfig['MCHID'] ='1481072062';     // 受理商ID
+        $this->wxpayConfig['SKEY'] = 'nndealnndealnndealnndealnndeal00';
 
         // 商户支付密钥Key
         $this->wxpayConfig['js_api_call_url'] = $this->get_url();
@@ -64,44 +70,7 @@ class PayController extends FrontendController
         $relate_url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : $php_self.(isset($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : $path_info);
         return $sys_protocal . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '') . $relate_url;
     }
-    public function createQrcode()
-    {
-        //使用统一支付接口
-        $unifiedOrder = new \UnifiedOrder_pub();
-        $unifiedOrder->setParameter("body",'1');//商品描述
-        $out_trade_no = time(); //自定义订单号，此处仅作举例
-        $unifiedOrder->setParameter("out_trade_no","$out_trade_no");//商户订单号
-        $unifiedOrder->setParameter("total_fee",1);//总金额
-        $url='http://web.nndeal.app/index.php/Home/order/notify/';
-        $unifiedOrder->setParameter("notify_url",$url);//通知地址
-        $unifiedOrder->setParameter("trade_type","NATIVE");//交易类型
-        //非必填参数，商户可根据实际情况选填
 
-        //获取统一支付接口结果
-        $unifiedOrderResult = $unifiedOrder->getResult();
-        //商户根据实际情况设置相应的处理流程
-        if ($unifiedOrderResult["return_code"] == "FAIL")
-        {
-            //商户自行增加处理流程
-            echo "通信出错：".$unifiedOrderResult['return_msg']."<br>";
-        }
-        elseif($unifiedOrderResult["result_code"] == "FAIL")
-        {
-            //商户自行增加处理流程
-            /*echo "错误代码：".$unifiedOrderResult['err_code']."<br>";
-            echo "错误代码描述：".$unifiedOrderResult['err_code_des']."<br>";*/
-            echo '该订单已支付';
-        }
-        elseif($unifiedOrderResult["code_url"] != NULL)
-        {
-            //从统一支付接口获取到code_url
-            $code_url = $unifiedOrderResult["code_url"];
-            //商户自行增加处理流程
-            //......
-        }
-
-        return view('Frontend.Index.CN.Web.Order.qrcode',compact('out_trade_no','code_url','unifiedOrderResult'));
-    }
 
     public function pay()
     {
@@ -152,8 +121,9 @@ class PayController extends FrontendController
         $unifiedOrder->setParameter("body",'勘察服务');//商品描述
         $out_trade_no = $order_number; //自定义订单号，此处仅作举例
         $unifiedOrder->setParameter("out_trade_no","$out_trade_no");//商户订单号
-        $unifiedOrder->setParameter("total_fee",$price*100);//总金额
-        $url='http://web.nndeal.app/index.php/Home/order/notify/';
+        $unifiedOrder->setParameter("total_fee",2);//总金额
+        $url='http://www.xuanpu100.com/order/notify_url/';
+        /* $url='http://www.xuanpu100.com/notify_url/';*/
         $unifiedOrder->setParameter("notify_url",$url);//通知地址
         $unifiedOrder->setParameter("trade_type","NATIVE");//交易类型
         //非必填参数，商户可根据实际情况选填
@@ -198,12 +168,15 @@ class PayController extends FrontendController
     }
 
 
-    public function notify()
+    public function notify_url(Request $request)
     {
+
         //使用通用通知接口
         $notify = new \Notify_pub();
         //存储微信的回调
-        $xml = $GLOBALS['HTTP_RAW_POST_DATA'];
+        /*$i = $request->getContent();*/
+        /*  $xml = $GLOBALS['HTTP_RAW_POST_DATA'];*/
+        $xml = $request->getContent();
         $notify->saveData($xml);
         //验证签名，并回应微信。
         //对后台通知交互时，如果微信收到商户的应答不是成功或超时，微信认为通知失败，
@@ -231,9 +204,13 @@ class PayController extends FrontendController
                 //  log_result($log_name,"【业务出错】:\n".$xml."\n");
             }
             else{
-                    $order = new Order();
-                    $data['user_id'] =1;
-                    Order::addData($order,$data);
+                $order_number = $notify->data["out_trade_no"];
+                $order = Order::where('order_number',$order_number)->first();
+                $order->status = 1;
+                $order->save();
+                /* $order = Order::where('id',2)->first();
+                 $order->user_id = 2;
+                 $order->save();*/
             }
             //商户自行增加处理流程,
             //例如：更新订单状态
