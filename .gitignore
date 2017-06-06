@@ -2,6 +2,7 @@
 bootstrap/compiled.php
 vendor
 storage/debugbar
+storage/framework
 # npm
 node_modules
 npm-debug.log

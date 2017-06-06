@@ -245,6 +245,9 @@
             $(".domain .erji2").html($(this).find("ul").html());
         });
         $(".domain").on("click",".erji2 li",function(){
+//            alert('点击选择区域');
+            $('#shop_area').val($(this).attr('value'));
+
             $(".first").addClass("none");
             $(".erji2,.all2").addClass("none");
             $(".shop_choice2 i").html($(this).html());
@@ -255,6 +258,21 @@
             $(this).parent().find(".second").removeClass("none");
         });
         $(".second ul li").click(function () {
+            //用var search_which这个变量来判定，到底点击的是那个div
+            var search_which = $(this).parent().parent().parent().attr('class');
+
+            if(search_which == 'type'){
+                $('#shop_type').val($(this).attr('value'));
+            }
+            if(search_which == 'area type'){
+                $('#min_area').val($(this).attr('min'));
+                $('#max_area').val($(this).attr('max'));
+            }
+            if(search_which == 'budget type'){
+                $('#min_rent').val($(this).attr('min'));
+                $('#max_rent').val($(this).attr('max'));
+            }
+//            alert(search_which);
             $(this).parent().parent().parent().find(".yb_shop").find("i").html($(this).html());
             $(this).parent().parent().addClass("none");
         });
@@ -338,6 +356,7 @@
             var max_area = $('#max_area').val();
             var min_rent = $('#min_rent').val();
             var max_rent = $('#max_rent').val();
+
 
             layui.use('layer', function(){
                 var layer = layui.layer;
