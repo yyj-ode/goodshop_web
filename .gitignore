@@ -32,6 +32,7 @@ public/html
 public/packages
 public/uploads
 public/build
+public/assets/frontend/index/web/shopimage
 /tasks/*.js
 /tasks/*.js.map
 #gulpfile.js
