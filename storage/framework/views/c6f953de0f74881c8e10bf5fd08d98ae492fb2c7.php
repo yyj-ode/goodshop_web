@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/frontend/index/web/css/common.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/frontend/index/web/css/live.css')); ?>">
+</head>
 <body>
 <?php echo $__env->make('Frontend.Index.CN.Web.Layout.reminder', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <div class="box">
@@ -79,4 +88,3 @@
 <script src="<?php echo e(asset('assets/frontend/index/web/js/index.js')); ?>"></script>
 </body>
 </html>
-<?php echo $__env->make('Frontend.Index.CN.Web.Layout.common', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
