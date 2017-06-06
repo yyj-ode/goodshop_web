@@ -8,10 +8,11 @@
  */
 interface LogStyler
 {
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Make level icon.
      *
@@ -31,4 +32,13 @@ interface LogStyler
      * @return string
      */
     public function color($level, $default = null);
+
+    /**
+     * Get strings to highlight.
+     *
+     * @param  array  $default
+     *
+     * @return array
+     */
+    public function toHighlight(array $default = []);
 }

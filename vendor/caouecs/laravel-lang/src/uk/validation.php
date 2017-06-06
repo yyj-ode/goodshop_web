@@ -47,6 +47,8 @@ return [
     'in_array'             => 'Значення поля :attribute не міститься в :other.',
     'integer'              => 'Поле :attribute має містити ціле число.',
     'ip'                   => 'Поле :attribute має містити IP адресу.',
+    'ipv4'                 => 'Поле :attribute має містити IPv4 адресу.',
+    'ipv6'                 => 'Поле :attribute має містити IPv6 адресу.',
     'json'                 => 'Дані поля :attribute мають бути в форматі JSON.',
     'max'                  => [
         'numeric' => 'Поле :attribute має бути не більше :max.',
