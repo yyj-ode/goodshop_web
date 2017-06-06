@@ -1,0 +1,21 @@
+{
+    "name": "rainwsy/aliyundm",
+    "description": "a aliyun mail push package",
+    "type": "package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "rainwsy53",
+            "email": "rain53@vip.qq.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Rainwsy\\Aliyunmail\\": "src"
+        }
+    }
+}
