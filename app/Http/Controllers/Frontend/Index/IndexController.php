@@ -64,7 +64,7 @@ class IndexController extends FrontendController
 
         } else {
             $i =urlencode('www.xuanpu100.com/wechat/account/register');
-            dd($i);
+//            dd($i);
 
             $subscribe = $this->subscribe(); //订阅和登录
             $user_login=$this->check_user();
@@ -203,7 +203,7 @@ class IndexController extends FrontendController
         $min_area = $request->get('min_area',0); //面积
         $max_area = $request->get('max_area',99999999); //面积
         $min_rent = $request->get('min_rent',0)*10000;
-        $max_rent = $request->get('max_rent',99999999)*100000;
+        $max_rent = $request->get('max_rent',99999999)*10000;
         //可经营业态
         if($this->com_map()){
             $map[]=$this->com_map();
@@ -217,9 +217,10 @@ class IndexController extends FrontendController
         }
         $map[]=['total_area','>',$min_area];
         $map[]=['total_area','<',$max_area];
-        $map[]=['rent','>',$min_rent];
-        $map[]=['rent','<',$max_rent];
+        $map[]=['budget','>',$min_rent];
+        $map[]=['budget','<',$max_rent];
 
+//        dd($map);
         $data = ShopLine::where($map)->orderBy('updated_at', 'desc')->skip(0)->take(12)->get()->toArray();
 
 //        dd($data);
