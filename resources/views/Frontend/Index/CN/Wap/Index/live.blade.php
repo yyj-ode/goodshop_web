@@ -37,7 +37,7 @@
                 <p>4. 采集照片，室内装修情况和外部环境情况。</p>
                 <p>5. 店铺周边信息采集（小区、人流、客群画像、竞争业态等）。</p>
                 <p>6. 竞争店信息，知己知彼百战不殆。</p>
-                <a href="report.blade.php"><div class="live_watch">查看服务报告示例</div></a>
+                <a href="{{url('index/report')}}"><div class="live_watch">查看服务报告示例</div></a>
             </div>
         </div>
     </div>
