@@ -184,7 +184,7 @@
                 </div>
                 <!--已收藏-->
                 <div class="hadcollect none">已收藏</div>
-                <div class=" _hadcollect none">取消收藏</div>
+                <div class="_hadcollect none">取消收藏</div>
             </div>
         </div>
         <div class="xsxsfx ">
@@ -338,24 +338,61 @@
     }
     addMarker(longitude, latitude);
 
+
     //点击收藏与取消
     $(".xx").on("click",".footsc",function(){
-        if($(".footsc span").html()=="收藏"){
-            $(".hadcollect").removeClass("none");
-            setTimeout(function(){
-                $(".hadcollect").addClass("none");
-            },1500);
-            $(".footsc i").addClass("marBgt");
-            $(".footsc span").addClass("marRight");
-            $(".footsc span").html("已收藏");
-        }else{
-            $("._hadcollect").removeClass("none");
-            setTimeout(function(){
-                $("._hadcollect").addClass("none");
-            },1500);
-            $(".footsc i").removeClass("marBgt");
-            $(".footsc span").removeClass("marRight");
-            $(".footsc span").html("收藏");
-        }
+//        if($(".footsc span").html()=="收藏"){
+//            $(".hadcollect").removeClass("none");
+//            setTimeout(function(){
+//                $(".hadcollect").addClass("none");
+//            },1500);
+//            $(".footsc i").addClass("marBgt");
+//            $(".footsc span").addClass("marRight");
+//            $(".footsc span").html("已收藏");
+//        }else{
+//            $("._hadcollect").removeClass("none");
+//            setTimeout(function(){
+//                $("._hadcollect").addClass("none");
+//            },1500);
+//            $(".footsc i").removeClass("marBgt");
+//            $(".footsc span").removeClass("marRight");
+//            $(".footsc span").html("收藏");
+//        }
+//        alert(1);
+        $.ajax({
+            type:'GET',
+            url:'{{url("collection/create")}}?id={{$data["id"]}}',
+            dataType:'json',
+            header:{},
+            success:function(data){
+                if(data == '您尚未登录'){
+//                    setTimeout(function(){
+//                        $(".xxxx").addClass("none");
+//                    },1500);
+                    alert('您尚未登录');
+                }
+                if(data == '收藏成功'){
+                    $(".hadcollect").removeClass("none");
+                    setTimeout(function(){
+                        $(".hadcollect").addClass("none");
+                    },1500);
+                    $(".footsc i").addClass("marBgt");
+                    $(".footsc span").addClass("marRight");
+                    $(".footsc span").html("已收藏");
+                }
+                if(data != '收藏成功'  && data != '您尚未登录'){
+                    $("._hadcollect").removeClass("none");
+                    setTimeout(function(){
+                        $("._hadcollect").addClass("none");
+                    },1500);
+                    $(".footsc i").removeClass("marBgt");
+                    $(".footsc span").removeClass("marRight");
+                    $(".footsc span").html("收藏");
+                }
+            },
+            error:function(data){
+                alert('收藏失败');
+            }
+        });
     });
 </script>
