@@ -89,38 +89,7 @@ $(".telephone").on("click",".call_no",function () {
 //     location.href="order.html";
 // });
 //
- //-------------------区域筛选-------------
-var that;
-$(".select_con").on("click",".bor_right_li",function () {
-    $(".shop_list").addClass("none");
-    $(".shaixuan").addClass("none");
-    $(this).siblings(".shaixuan").removeClass("none");
-    var that =  $(this).parent().index();
-});
-$("body").delegate(".erci ul li","click",function(){
-    $(this).css({"color":"#083680"}).siblings().css({"color":"#000"});
-    if($(this).html().length>4){
-        $(".bor_right").eq(0).find("span").html($(this).html().substring(0,3)+"...");
-    }else{
-        $(".bor_right").eq(0).find("span").html($(this).html());
-    }
-    $(this).parent().parent().parent().addClass("none");
-    $(".shop_list").removeClass("none");
-});
-$(".shaixuan2 ul li").click(function() {
-    $(this).css({"color": "#083680"}).siblings().css({"color": "#000"});
-    if($(this).html().length>4){
-        $(this).parent().parent().parent().find("span").html($(this).html().substring(0,3)+"...");
-    }else{
-        $(this).parent().parent().parent().find("span").html($(this).html());
-    }
-    $(this).parent().parent().addClass("none");
-    $(".shop_list").removeClass("none");
-});
-$(".shaixuan1>ul>li").click(function(){
-    $(this).css({"color":"#083680"}).siblings().css({"color":"#000"});
-    $(".erci ul").html($(this).find(".aa").html());
-})
+
 
 // // 点击选择 筛选类别
 //     $(".select_con").on("click",".select_con>li",function () {

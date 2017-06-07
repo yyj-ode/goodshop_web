@@ -50,25 +50,13 @@ class IndexController extends FrontendController
      */
     public function index(Request $request)
     {
-        if ($this->is_mobile() == true) {
-
-            /*$shop_type = Session::get('shop_type');
-            if($shop_type){
-                $shop_data = ShopLine::skip(0)->take(10)->get();
-            }else{
-                $shop_data = '';
-            }
-
-            return view('Frontend.Index.CN.Wap.Index.index',compact('shop_type','shop_data'));*/
-            return view('Frontend.Index.CN.Wap.Index.index');
-
-        } else {
             $subscribe = $this->subscribe(); //订阅和登录
             $user_login=$this->check_user();
             $price = $this->getPriceData();
             $totalarea = $this->getTotalareaData();
             $format= $this->getCategoryData();
             $area_level = $this->getDistrictData();
+            $i = Area::where('id',11)->select('name');
             //搜索条件
             if($this->com_map()){
                 $map[]=$this->com_map();
@@ -88,12 +76,21 @@ class IndexController extends FrontendController
                 $data[$k]['village_num'] = SurroundNumStore::getSurroundVillageNum($longitude,$latitude,$kilometer);
                 $data[$k]['shoppingcenter_num'] = SurroundNumStore::getSurroundShoppingCentergNum($longitude,$latitude,$kilometer);
                 $data[$k]['shopsurrounding_num'] = SurroundNumStore::getSurroundShopNum($longitude,$latitude,$kilometer);
-//                dd($data[$k]['our_image']);
                 $data[$k]['our_image'] = strExplode($v['our_image']);
+                $data[$k]['city_county'] = $this->city_county($v['city'],$v['county']);
             }
-//            dd($data);
+        if ($this->is_mobile() == true){
+            return view('Frontend.Index.CN.Wap.Index.index',compact('data','user_login','price','totalarea','format','area_level','subscribe'));
+        }else{
             return view('Frontend.Index.CN.Web.Index.index', compact('data','user_login','price','totalarea','format','area_level','subscribe'));
         }
+
+    }
+    //获得市县
+    public function city_county($city,$county){
+        $city = Area::where('id',$city)->first();
+        $county = Area::where('id',$county)->first();
+        return $city->name.'-'.$county->name;
     }
     public function com_map(){
         $session_map = Session::get('MAP');
@@ -259,11 +256,8 @@ class IndexController extends FrontendController
      */
     public function moredata(Request $request)
     {
-        if ($this->is_mobile() == true) {
-
-        } else {
             $start = intval($request->start);
-            $length = intval($request->length);
+            $length = intval($request->get('length',12));
 
             //搜索条件
             $key = $request->get('key',''); //关键词
@@ -292,7 +286,7 @@ class IndexController extends FrontendController
             $map[]=['rent','>',$min_rent];
             $map[]=['rent','<',$max_rent];
 
-            $data = ShopLine::where($map)->orderBy('updated_at', 'desc')->skip($start)->take($length)->get()->toArray();
+            $data = ShopLine::where($map)->orderBy('id', 'desc')->skip($start)->take($length)->get()->toArray();
 
             if($data){
                 $res['status'] = 200;
@@ -314,10 +308,10 @@ class IndexController extends FrontendController
                 $data[$k]['shoppingcenter_num'] = SurroundNumStore::getSurroundShoppingCentergNum($longitude,$latitude,$kilometer);
                 $data[$k]['shopsurrounding_num'] = SurroundNumStore::getSurroundShopNum($longitude,$latitude,$kilometer);
                 $data[$k]['our_image'] = strExplode($v['our_image']);
+                $data[$k]['city_county'] = $this->city_county($v['city'],$v['county']);
             }
             $res['content'] = $data;
             return response()->json($res);
-        }
     }
     //房源信息手机站
     public function shop(Request $request){
