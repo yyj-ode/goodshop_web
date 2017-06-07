@@ -356,7 +356,12 @@
 //                    setTimeout(function(){
 //                        $(".xxxx").addClass("none");
 //                    },1500);
-                    alert('您尚未登录');
+                    layer.open({
+                        content: '您尚未登录'
+                        ,skin: 'msg'
+                        ,time: 2 //2秒后自动关闭
+                    });
+//                    alert('您尚未登录');
                 }
                 if(data == '收藏成功'){
                     $(".hadcollect").removeClass("none");
