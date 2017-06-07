@@ -24,7 +24,7 @@
                 @endforeach
             </div>
         </div>
-        <i></i>
+        <a href="{{url('/')}}"><i></i></a>
         <!--<p class="leixing">-->
         <!--<span>生活社区型</span>-->
         <!--<span>1</span>/ 7-->

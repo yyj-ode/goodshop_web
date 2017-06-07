@@ -11,7 +11,7 @@
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
         </div>
-        <i></i>
+        <a href="<?php echo e(url('/')); ?>"><i></i></a>
         <!--<p class="leixing">-->
         <!--<span>生活社区型</span>-->
         <!--<span>1</span>/ 7-->
