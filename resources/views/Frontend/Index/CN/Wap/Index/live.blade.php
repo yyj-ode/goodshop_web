@@ -1,24 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-    <title>Title</title>
-    <link rel="stylesheet" href="{{asset('assets/frontend/index/wap/css/common.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('assets/frontend/index/wap/css/index.css')}}" type="text/css">
-    <script>
-        document.querySelector("html").style.fontSize = document.documentElement.clientWidth/375*50+"px";
-    </script>
-</head>
+@include('Frontend.Index.CN.wap.Layout.doctype')
 <body>
 <!--现场勘查-->
 <div class="live">
-    <div class="head">
+   {{-- <div class="head">
         <i class="coordinate"></i>
         <span>北京</span>
         <a href="###"><i class="logo"></i></a>
         <a href="###"><i class="user"></i></a>
-    </div>
+    </div>--}}
+   @include('Frontend.Index.CN.wap.Layout.header')
     <!--<div class="headhead"></div>-->
     <div class="live_content">
         <div class="live_cont">
@@ -44,12 +34,13 @@
     <div class="live_catch">获得服务</div>
     <!--重新支付，去支付-->
     <div class="pay none">
-        <div class="head">
+    @include('Frontend.Index.CN.wap.Layout.header')
+        {{--<div class="head">
             <i class="coordinate"></i>
             <span>北京</span>
             <a href="###"><i class="logo"></i></a>
             <a href="###"><i class="user"></i></a>
-        </div>
+        </div>--}}
         <!--<div class="headhead"></div>-->
         <div class="pay_content">
             <div class="pay_con">

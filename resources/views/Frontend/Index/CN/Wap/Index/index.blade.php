@@ -7,7 +7,13 @@
         <!--<div class="headhead"></div>-->
         <div class="search">
             <div class="search_key _search_key">
-                <input placeholder="输入关键字搜索铺源店址" readonlyunselectable="on" type="text">
+                <input id="shop_area" name="shop_area" value="" type="hidden">
+                <input id="shop_type" name="business_type" value="0" type="hidden">
+                <input id="min_area" name="min_area" value="0" type="hidden">
+                <input id="max_area" name="max_area" value="99999999" type="hidden">
+                <input id="min_rent" name="min_rent" value="0" type="hidden">
+                <input id="max_rent" name="max_rent" value="9999999" type="hidden">
+                <input placeholder="输入关键字搜索铺源店址" id="show_key" readonlyunselectable="on" type="text">
                 <i></i>
             </div>
         </div>
@@ -56,7 +62,7 @@
                     <div class="shaixuan shaixuan2 none">
                         <ul>
                             @foreach($format as $value)
-                                <li value="{{$value['id']}}">{{$value['name']}}</li>
+                                <li class="business_type" value="{{$value['id']}}">{{$value['name']}}</li>
                             @endforeach
                         </ul>
                     </div>
@@ -69,9 +75,9 @@
                     <!--主页筛选部分-->
                     <div class="shaixuan shaixuan2 none">
                         <ul>
-                            <li min="0" max="99999999">不限</li>
+                            <li min="0" max="99999999" class="area_type">不限</li>
                             @foreach($totalarea as $value)
-                                <li min="{{$value['min_area']}}" max="{{$value['max_area']}}">{{$value['value']}}㎡</li>
+                                <li class="area_type" min="{{$value['min_area']}}" max="{{$value['max_area']}}">{{$value['value']}}㎡</li>
                             @endforeach
                         </ul>
                     </div>
@@ -84,9 +90,9 @@
                     <!--主页筛选部分-->
                     <div class="shaixuan shaixuan2 none">
                         <ul>
-                            <li min="0" max="99999999">不限</li>
+                            <li min="0" max="99999999" class="budget_type">不限</li>
                             @foreach($price as $v)
-                                <li min="{{$v['price_min']}}" max="{{$v['price_max']}}">{{$v['value']}}</li>
+                                <li min="{{$v['price_min']}}" class="budget_type" max="{{$v['price_max']}}">{{$v['value']}}</li>
                             @endforeach
                         </ul>
                     </div>
@@ -103,7 +109,9 @@
                     </div>
                     <div class="detail_mess">
                         <p>
-                            <span class="mess_class">区域类型：</span>
+                            {{--<span class="mess_class">区域类型：</span>
+                            <span class="mess_kind">生活社区- 高端</span>--}}
+                            <span class="mess_class">商铺类型：</span>
                             <span class="mess_kind">生活社区- 高端</span>
                         </p>
                         <p class="mess_people mess_peo">客流：<i>20万+</i></p>
@@ -183,14 +191,8 @@
         <!--<div class="headhead"></div>-->
         <div class="search">
             <div class="search_key">
-                <input id="shop_area" name="shop_area" value="" type="hidden">
-                <input id="shop_type" name="business_type" value="0" type="hidden">
-                <input id="min_area" name="min_area" value="0" type="hidden">
-                <input id="max_area" name="max_area" value="99999999" type="hidden">
-                <input id="min_rent" name="min_rent" value="0" type="hidden">
-                <input id="max_rent" name="max_rent" value="9999999" type="hidden">
                 <input placeholder="输入关键字搜索铺源店址" id="search_content" readonlyunselectable="on" type="text">
-                <a href="###"><i></i></a>
+                <a href="###"><i onclick="key_search()"></i></a>
             </div>
         </div>
         <div class="search_content">
@@ -305,7 +307,7 @@
             ,time: 2 //2秒后自动关闭
         });
         var start = $('.shop_list a').length;
-        var key = $('#search_content').val();
+        var key = $('#show_key').val();
         var shop_area = $('#shop_area').val();
         var business_type = $('#shop_type').val();
         var min_area = $('#min_area').val();
@@ -313,10 +315,25 @@
         var min_rent = $('#min_rent').val();
         var max_rent = $('#max_rent').val();
         var map = {'start':start,'shop_area':shop_area,'key':key,'business_type':business_type,'min_area':min_area,'max_area':max_area,'min_rent':min_rent,'max_rent':max_rent};
-        content(map);
+        content(map,'more');
     });
+    //关键词搜索
+    function key_search() {
+        var key = $('#search_content').val();
+        var shop_area = $('#shop_area').val();
+        var business_type = $('#shop_type').val();
+        var min_area = $('#min_area').val();
+        var max_area = $('#max_area').val();
+        var min_rent = $('#min_rent').val();
+        var max_rent = $('#max_rent').val();
+        //搜索条件显示
+        $('#show_key').val(key);
+
+        var map = {'start':0,'shop_area':shop_area,'key':key,'business_type':business_type,'min_area':min_area,'max_area':max_area,'min_rent':min_rent,'max_rent':max_rent};
+        content(map,'key');
+    }
     //ajax获取房源信息
-    function content(map) {
+    function content(map,type) {
         $.ajax({
             type: 'POST',
             url: '{{url("index/moredata")}}',
@@ -342,13 +359,28 @@
                         html += '<li class="near">小区'+v.village_num+'</li> <li class="near">商铺'+v.shopsurrounding_num+'</li> </ul></div></li></a>';
 
                     });
-                    $('.shop_list').append(html);
+                    if(type == 'more'){
+                        $('.shop_list').append(html);
+                    }else{
+                        $('.shop_list').html(html);
+                        if(type == 'key'){
+                            //搜索页隐藏
+                            $(".search_main").addClass("none");
+                            $(".con").removeClass("none");
+                        }
+                    }
+
                 }else{
                     layer.open({
                         content: data.error
                         ,skin: 'msg'
                         ,time: 2 //2秒后自动关闭
                     });
+                    if(type == 'key'){
+                        $(".search_main").addClass("none");
+                        $(".con").removeClass("none");
+                    }
+
                 }
             }
         });
@@ -361,7 +393,6 @@
         $(".shaixuan").addClass("none");
         $(this).siblings(".shaixuan").removeClass("none");
         var that =  $(this).parent().index();
-        alert(0);
     });
     //地区
     $("body").delegate(".erci ul li","click",function(){
@@ -373,7 +404,17 @@
         }
         $(this).parent().parent().parent().addClass("none");
         $(".shop_list").removeClass("none");
-        alert(1);
+        //我的
+        $('#shop_area').val($(this).attr('value'));
+        var key = $('#show_key').val();
+        var shop_area = $('#shop_area').val();
+        var business_type = $('#shop_type').val();
+        var min_area = $('#min_area').val();
+        var max_area = $('#max_area').val();
+        var min_rent = $('#min_rent').val();
+        var max_rent = $('#max_rent').val();
+        var map = {'start':0,'shop_area':shop_area,'key':key,'business_type':business_type,'min_area':min_area,'max_area':max_area,'min_rent':min_rent,'max_rent':max_rent};
+        content(map,'new');
     });
     //其他
     $(".shaixuan2 ul li").click(function() {
@@ -385,12 +426,33 @@
         }
         $(this).parent().parent().addClass("none");
         $(".shop_list").removeClass("none");
-        alert(2);
+        //我的
+        var type = $(this).attr('class');
+        if(type == 'business_type'){
+            $('#shop_type').val($(this).attr('value'));
+        }
+        if(type == 'area_type'){
+            $('#min_area').val($(this).attr('min'));
+            $('#max_area').val($(this).attr('max'));
+        }
+        if(type == 'budget_type'){
+            $('#min_rent').val($(this).attr('min'));
+            $('#max_rent').val($(this).attr('max'));
+        }
+
+        var key = $('#show_key').val();
+        var shop_area = $('#shop_area').val();
+        var business_type = $('#shop_type').val();
+        var min_area = $('#min_area').val();
+        var max_area = $('#max_area').val();
+        var min_rent = $('#min_rent').val();
+        var max_rent = $('#max_rent').val();
+        var map = {'start':0,'shop_area':shop_area,'key':key,'business_type':business_type,'min_area':min_area,'max_area':max_area,'min_rent':min_rent,'max_rent':max_rent};
+        content(map,'new');
     });
     $(".shaixuan1>ul>li").click(function(){
         $(this).css({"color":"#083680"}).siblings().css({"color":"#000"});
         $(".erci ul").html($(this).find(".aa").html());
-        alert(3);
     })
 </script>
 </body>
