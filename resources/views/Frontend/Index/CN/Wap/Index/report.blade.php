@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
     <title>Title</title>
-    <link rel="stylesheet" href="css/common.css" type="text/css">
-    <link rel="stylesheet" href="css/report.css" type="text/css">
+    {{--<link rel="stylesheet" href="css/common.css" type="text/css">--}}
+    <link rel="stylesheet" href="{{asset('assets/frontend/index/wap/css/common.css')}}" type="text/css">
+    {{--<link rel="stylesheet" href="css/report.css" type="text/css">--}}
+    <link rel="stylesheet" href="{{asset('assets/frontend/index/wap/css/report.css')}}" type="text/css">
     <script>
         document.querySelector("html").style.fontSize = document.documentElement.clientWidth/375*50+"px";
     </script>

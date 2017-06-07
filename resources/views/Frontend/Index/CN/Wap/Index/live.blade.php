@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
     <title>Title</title>
-    <link rel="stylesheet" href="css/common.css" type="text/css">
-    <link rel="stylesheet" href="css/index.css" type="text/css">
+    <link rel="stylesheet" href="{{asset('assets/frontend/index/wap/css/common.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('assets/frontend/index/wap/css/index.css')}}" type="text/css">
     <script>
         document.querySelector("html").style.fontSize = document.documentElement.clientWidth/375*50+"px";
     </script>
@@ -37,7 +37,7 @@
                 <p>4. 采集照片，室内装修情况和外部环境情况。</p>
                 <p>5. 店铺周边信息采集（小区、人流、客群画像、竞争业态等）。</p>
                 <p>6. 竞争店信息，知己知彼百战不殆。</p>
-                <a href="report.blade.php"><div class="live_watch">查看服务报告示例</div></a>
+                <a href="{{url('index/report')}}"><div class="live_watch">查看服务报告示例</div></a>
             </div>
         </div>
     </div>
@@ -68,7 +68,7 @@
         </div>
     </div>
 </div>
-<script src="js/zepto.js"></script>
+<script src="{{asset('assets/frontend/index/wap/js/zepto.js')}}"></script>
 <script>
     //点击获得服务
     var olive = document.getElementsByClassName("live_catch")[0];
