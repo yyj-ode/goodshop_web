@@ -100,34 +100,7 @@ $(".phoneNumber input").blur(function () {
 
     }
 });
-//-------------  详情页  --------------//
-//调取高德地图，根据经纬度定位
-var map = new AMap.Map('container',{
-    resizeEnable: true,
-    zoom: 10,
-    center: [116.397428, 39.90923],
-    mapStyle:'amap://styles/d6bf8c1d69cea9f5c696185ad4ac4c86'
-});
-map.plugin(["AMap.ToolBar"], function() {
-    map.addControl(new AMap.ToolBar());
-});
-//添加标注
-function addMarker(j,w){
-    marker = new AMap.Marker({
-        icon:new AMap.Icon({
-            image: "img/pcdt.png",
-            size: new AMap.Size(23, 29),  //图标大小
-            imageSize: new AMap.Size(23,29)
-        }),
-        position:new AMap.LngLat(j,w)
-    });
-    marker.setMap(map);  //在地图上添加点
-    //鼠标点击marker弹出自定义的信息窗体
-    AMap.event.addListener(marker, 'click', function() {
-        infoWindow.open(map, marker.getPosition());
-    });
-}
- addMarker(116.397428, 39.90923);
+
 // // addMarker(116, 39);
 // //添加窗体信息
 // //实例化信息窗体
@@ -192,26 +165,7 @@ $(".det_message").on("click",".det_message li",function(){
     }
 });
 
-//点击收藏与取消
-$(".xx").on("click",".footsc",function(){
-    if($(".footsc span").html()=="收藏"){
-        $(".hadcollect").removeClass("none");
-        setTimeout(function(){
-            $(".hadcollect").addClass("none");
-        },1500);
-        $(".footsc i").addClass("marBgt");
-        $(".footsc span").addClass("marRight");
-        $(".footsc span").html("已收藏");
-    }else{
-        $("._hadcollect").removeClass("none");
-        setTimeout(function(){
-            $("._hadcollect").addClass("none");
-        },1500);
-        $(".footsc i").removeClass("marBgt");
-        $(".footsc span").removeClass("marRight");
-        $(".footsc span").html("收藏");
-    }
-});
+
 //联系看店
 $(".xx").on("click",".footkd",function(){
     $(".lxtel").removeClass("none");
