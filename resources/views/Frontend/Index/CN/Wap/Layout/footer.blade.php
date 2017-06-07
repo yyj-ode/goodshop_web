@@ -11,21 +11,21 @@
 
 <script>
     //---------------------登录-------------------//
-    //点击小人登录
-    $(".head").on("click",".head ._user",function(){
-        $(".login_page").removeClass("none");
-        $(".con").addClass("none");
-        $(this).css({"zIndex":"0"});
-    });
-    //登录后点击小人  !!!!!!!!!wode????????
-    $(".head").on("click",".user_login",function(){
-        $(".mine").removeClass("none");
-        $(".con").addClass("none");
-    });
-    $(".head").on("click",".head .wode",function(){
-        $(".mine").removeClass("none");
-        $(".con").addClass("none");
-    });
+//    //点击小人登录
+//    $(".head").on("click",".head ._user",function(){
+//        $(".login_page").removeClass("none");
+//        $(".con").addClass("none");
+////        $(this).css({"zIndex":"0"});
+//    });
+//    //登录后点击小人  !!!!!!!!!wode????????
+//    $(".head").on("click",".user_login",function(){
+//        $(".mine").removeClass("none");
+//        $(".con").addClass("none");
+//    });
+//    $(".head").on("click",".head .wode",function(){
+//        $(".mine").removeClass("none");
+//        $(".con").addClass("none");
+//    });
     //登录返回
     $(".login_page").on("click",".login_page .coordinate",function(){
         $(".login_page").addClass("none");
@@ -56,6 +56,37 @@
         // $(this).attr("placeholder"," ");
     });
 
+    {{-- 判断是否登录 --}}
+    $.ajax({
+        type: 'GET',
+        url: '{{url("user/check")}}',
+        dataType: 'json',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(data){
+            if(data.status == 200){
+                //$('.head ._user').css({"zIndex":"0"});
+                $(".head").on("click",".head ._user",function(){
+                    $(".mine").removeClass("none");
+                    $(".con").addClass("none");
+                    $(".login_page").addClass("none");
+                });
+            }
+            if(data.status == 500){
+                $(".head").on("click",".head ._user",function(){
+                $(".login_page").removeClass("none");
+                $(".con").addClass("none");
+                $(".mine").addClass("none");
+                });
+               // $('.head .wode').css({"zIndex":"0"});
+            }
+        },
+        error: function(xhr, type){
+            alert('Ajax error!');
+        }
+    });
+
     {{-- 登录 --}}
     $('#userLogin').on('click',function () {
         $.ajax({
@@ -68,7 +99,11 @@
             },
             success: function(data){
                 if(data.status == 200){
-                    location.reload();
+                    $(".con").removeClass("none");
+//                    $(".mine").removeClass("none");
+                    $(".login_page").addClass("none");
+
+//                    $('.head .wode').css({"zIndex":"0"});
                 }else{
                     layer.open({
                         content: data.message
