@@ -55,6 +55,35 @@
     $(".phoneNumber input").focus(function () {
         // $(this).attr("placeholder"," ");
     });
+
+    {{-- 登录 --}}
+    $('#userLogin').on('click',function () {
+        $.ajax({
+            type: 'POST',
+            url: '{{url("user/ajax")}}',
+            data: {type:1,'sms_code':$("#sms_code").val(),'mobile':$('#mobile_data').val()},
+            dataType: 'json',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(data){
+                if(data.status == 200){
+                    location.reload();
+                }else{
+                    layer.open({
+                        content: data.message
+                        ,skin: 'msg'
+                        ,time: 2 //2秒后自动关闭
+                    });
+                }
+            },
+            error: function(xhr, type){
+                alert('Ajax error!')
+            }
+        });
+    });
+
+//    验证码
     $(".phoneNumber input").blur(function () {
         var phone = $(".phoneNumber input").val()
         if(!(/^1[34578]\d{9}$/.test(phone))){

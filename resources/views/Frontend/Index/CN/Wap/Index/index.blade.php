@@ -218,17 +218,17 @@
                 <div class="phoneNumber">
                     <span></span>
                     <!--<img src="images/phone.png" alt="">-->
-                    <input type="text" placeholder="请输入手机号码">
+                    <input type="text" placeholder="请输入手机号码" id="mobile_data">
                 </div>
                 <div class="verifica">
                     <div class="verificationCode">
                         <span></span>
                         <!--<img src="images/yanzheng.png" alt="">-->
-                        <input type="text" placeholder="请输入验证码">
+                        <input type="text" placeholder="请输入验证码" id="sms_code">
                     </div>
                     <div class="send">发送验证码</div>
                 </div>
-                <div class="rightNow"><a href="###">立即登录</a></div>
+                <div class="rightNow"  id="userLogin"><a href="###">立即登录</a></div>
                 <p>登录代表您已同意&nbsp;&nbsp;<a href="###">选铺100 用户服务协议</a></p>
                 <!--<div class="login_text"><h6>其他方式登录</h6><a href="###"><img src="images/weixin.png" alt=""></a></div>-->
             </form>
@@ -298,7 +298,7 @@
             <!--<ul></ul>-->
         <!--</div>-->
     <!--</div>-->
-@include('Frontend.Index.CN.wap.Layout.footer')
+@include('Frontend.Index.CN.Wap.Layout.footer')
 <script type="text/javascript">
     $('#more').on('click',function(){
         layer.open({
