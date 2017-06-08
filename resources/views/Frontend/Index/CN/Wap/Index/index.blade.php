@@ -1,9 +1,9 @@
 
-@include('Frontend.Index.CN.wap.Layout.doctype')
+@include('Frontend.Index.CN.Wap.Layout.doctype')
 <body>
 <!--//页面默认-->
     <div class="con">
-    @include('Frontend.Index.CN.wap.Layout.header')
+    @include('Frontend.Index.CN.Wap.Layout.header')
         <!--<div class="headhead"></div>-->
         <div class="search">
             <div class="search_key _search_key">
@@ -298,7 +298,7 @@
             <!--<ul></ul>-->
         <!--</div>-->
     <!--</div>-->
-@include('Frontend.Index.CN.wap.Layout.footer')
+@include('Frontend.Index.CN.Wap.Layout.footer')
 <script type="text/javascript">
     $('#more').on('click',function(){
         layer.open({

@@ -14,7 +14,7 @@
 <body>--}}
 @include('Frontend.Index.CN.wap.Layout.doctype')
 <div class="detail">
-@include('Frontend.Index.CN.wap.Layout.header')
+@include('Frontend.Index.CN.Wap.Layout.header')
     <!--<div class="headhead"></div>-->
     <div class="detail_pic">
         <div class="swiper-container">

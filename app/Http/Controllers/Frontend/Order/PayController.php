@@ -71,7 +71,7 @@ class PayController extends FrontendController
         return $sys_protocal . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '') . $relate_url;
     }
 
-
+    //PC支付
     public function pay()
     {
         //判断是否登录
@@ -166,7 +166,97 @@ class PayController extends FrontendController
 
         return response()->json($data);
     }
+    //移动订单入库
+    public function mobile_order(){
+        //判断是否登录
+        /*$user_login=$this->check_user();
+        if(!$user_login){
+            $data['static'] = 100;  // 用户没有登录
+            $data['message'] = '请您先登录';  // 成功
+            return response()->json($data);
+        }*/
+        //订单入库
+        $shop_id = Session::get('session_detail_id');
+        if(!$shop_id){
+            $data['static'] = 400;  // 用户没有登录
+            $data['message'] = '您勘查的商铺不存在';  // 成功
+            return response()->json($data);
+        }
+        $shop = ShopLine::where('id',$shop_id)->first();
+        if(!$shop){
+            $data['static'] = 400;  // 用户没有登录
+            $data['message'] = '您勘查的商铺不存在';  // 成功
+            return response()->json($data);
+        }
+        $order = new Order;
+        //获取用户id
+        $price = 100; //金钱
+        $user_info = session('USER_DATA');
+        /*  $order->user_id = $user_info['id'];*/
+        $order->user_id = 21;
+        $order->goods_name = '勘察服务';
+        $order->shop_id = $shop['id'];
+        $order->total = $price;
+        $order->price = $price;
+        $order->status = 5; //待支付
+        if(!$order->save()){
+            $data['static'] = 400;  // 用户没有登录
+            $data['message'] = '订单入库失败';
+            return response()->json($data);
+        }
+        //保存订单编号
+        $id = $order->id;
+        $order_up = Order::where('id',$id)->first();
+        $order_number = time().$order_up['id'];
+        $order_up->order_number = $order_number;
+        $order_up->save();
 
+
+        Session::put('order_number',$order_number);
+        $data['static'] = 200;  // 用户没有登录
+        $data['message'] = '请稍后...';
+        $data['order_number'] = $order_number;
+        return response()->json($data);
+    }
+    //移动支付
+    public function mobile_payment(){
+        $order_number = Session::get('order_number');
+        $payprice = 0.01;
+        if(!$order_number || !$payprice) {
+            die('订单参数不完整!');
+        }
+        // 使用jsapi接口
+        $jsApi = new \JsApi_pub();
+        // 通过code获得openid
+        if (!isset($_GET['code'])) {
+            // 触发微信返回code码
+            $url = $jsApi->createOauthUrlForCode('http://www.xuanpu100.com/order/mobile_payment/?order_number='.$order_number);
+            /*Header("Location: " . $url);*/
+            return redirect($url);
+        } else {
+            // 获取code码,以获取openid
+            $code = $_GET['code'];
+            $jsApi->setCode($code);
+            $openid = $jsApi->getOpenId();
+        }
+        // 2,使用统一支付接口
+        $unifiedOrder = new \UnifiedOrder_pub();
+        $unifiedOrder->setParameter("openid", $openid);
+        $unifiedOrder->setParameter("body", $order_number);                          // 商品描述
+        // 自定义订单号,此处仅作举例
+        $out_trade_no = $order_number;
+        $unifiedOrder->setParameter("out_trade_no", $out_trade_no);              // 商户订单号
+        $unifiedOrder->setParameter("total_fee", $payprice * 100);               // 总金额
+        $unifiedOrder->setParameter("notify_url", \WxPayConf_pub::$NOTIFY_URL);  // 通知地址
+        $unifiedOrder->setParameter("trade_type", "JSAPI");                      // 交易类型
+        $prepay_id = $unifiedOrder->getPrepayId();
+        // 3,使用jsapi调起支付
+        $jsApi = new \JsApi_pub();
+        $jsApi->setPrepayId($prepay_id);
+        $jsApiParameters = $jsApi->getParameters();
+        $returnurl = '/index.php/Phone/offline/success/';
+        return view('Frontend.Index.CN.Wap.Order.pay',compact('jsApiParameters','returnurl'));
+    }
 
     public function notify_url(Request $request)
     {
