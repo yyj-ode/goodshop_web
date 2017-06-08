@@ -1,7 +1,7 @@
 @include('Frontend.Index.CN.Wap.Layout.doctype')
 <body>
 <!--现场勘查-->
-<div class="live">
+<div class="live con">
    {{-- <div class="head">
         <i class="coordinate"></i>
         <span>北京</span>
@@ -9,7 +9,7 @@
         <a href="###"><i class="user"></i></a>
     </div>--}}
    @include('Frontend.Index.CN.Wap.Layout.header')
-    <!--<div class="headhead"></div>-->
+    <div class="headhead"></div>
     <div class="live_content">
         <div class="live_cont">
             <h4>选铺100专业现场勘察服务</h4>
@@ -41,7 +41,7 @@
             <a href="###"><i class="logo"></i></a>
             <a href="###"><i class="user"></i></a>
         </div>--}}
-        <!--<div class="headhead"></div>-->
+        <div class="headhead"></div>
         <div class="pay_content">
             <div class="pay_con">
                 <div class="pay_wx">
@@ -59,6 +59,7 @@
         </div>
     </div>
 </div>
+@include('Frontend.Index.CN.Wap.Layout.login')
 @include('Frontend.Index.CN.Wap.Layout.footer')
 <script src="{{asset('assets/frontend/index/wap/js/zepto.js')}}"></script>
 <script>

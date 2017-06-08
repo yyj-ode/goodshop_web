@@ -13,9 +13,10 @@
 </head>
 <body>--}}
 @include('Frontend.Index.CN.wap.Layout.doctype')
-<div class="detail">
-@include('Frontend.Index.CN.Wap.Layout.header')
-    <!--<div class="headhead"></div>-->
+<div class="detail con">
+
+@include('Frontend.Index.CN.wap.Layout.header')
+  <div class="headhead"></div>
     <div class="detail_pic">
         <div class="swiper-container">
             <div class="swiper-wrapper">
@@ -301,6 +302,11 @@
         </div>
     </div>
 </div>
+<!--登录页  用户协议  个人中心-->
+@include('Frontend.Index.CN.Wap.Layout.login')
+
+
+
 <input type="hidden" id="longitude" value="{{$data['longitude']}}">
 <input type="hidden" id="latitude" value="{{$data['latitude']}}">
 @include('Frontend.Index.CN.wap.Layout.footer')
