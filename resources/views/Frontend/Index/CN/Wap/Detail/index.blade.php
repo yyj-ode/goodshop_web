@@ -164,7 +164,11 @@
             </div>
             <div class="footxx">
                 <div class="footsc">
-                    <i></i>
+                    @if($user_login != null)
+                        <i class="marBgt"></i>
+                    @else
+                        <i></i>
+                    @endif
                     <span>收藏</span>
                 </div>
                 <a href="{{url('index/live')}}"><div class="footkc">
