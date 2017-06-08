@@ -44,8 +44,9 @@ class MyshopController extends FrontendController
 
     public function demo_lepu(){
         $mode = new LePu();
-        $data_original = $mode::offset(16000)->limit(1000)->get()->toArray();
-//        dd($data_original);
+//        dd($mode);
+        $data_original = $mode::offset(0)->limit(10)->get()->toArray();
+        dd($data_original);
         $result = ['status' => 'error', 'message' => '数据请求失败！', 'status_code' => '404'];
         foreach ($data_original as $v){
             $ShopLine = new ShopLine();
