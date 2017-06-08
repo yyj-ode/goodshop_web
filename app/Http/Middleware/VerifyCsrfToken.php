@@ -23,5 +23,6 @@ class VerifyCsrfToken extends BaseVerifier
         'admin/uploads/screenshot',
         'admin/uploads/image',
         'order/notify_url',
+        'order/mobile_payment',
     ];
 }

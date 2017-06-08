@@ -1,4 +1,4 @@
-@include('Frontend.Index.CN.wap.Layout.doctype')
+@include('Frontend.Index.CN.Wap.Layout.doctype')
 <body>
 <!--现场勘查-->
 <div class="live">
@@ -8,7 +8,7 @@
         <a href="###"><i class="logo"></i></a>
         <a href="###"><i class="user"></i></a>
     </div>--}}
-   @include('Frontend.Index.CN.wap.Layout.header')
+   @include('Frontend.Index.CN.Wap.Layout.header')
     <!--<div class="headhead"></div>-->
     <div class="live_content">
         <div class="live_cont">
@@ -34,7 +34,7 @@
     <div class="live_catch">获得服务</div>
     <!--重新支付，去支付-->
     <div class="pay none">
-    @include('Frontend.Index.CN.wap.Layout.header')
+    @include('Frontend.Index.CN.Wap.Layout.header')
         {{--<div class="head">
             <i class="coordinate"></i>
             <span>北京</span>
@@ -47,18 +47,19 @@
                 <div class="pay_wx">
                     <i></i>
                     <em>微信支付</em>
-                    <span></span>
+                    <span val="wx"></span>
                 </div>
                 <div class="pay_zfb">
                     <i></i>
                     <em>支付宝支付</em>
-                    <span></span>
+                    <span val="zfb"></span>
                 </div>
-                <div class="payNow">去支付</div>
+                <div class="payNow" onclick="pay()">去支付</div>
             </div>
         </div>
     </div>
 </div>
+@include('Frontend.Index.CN.Wap.Layout.footer')
 <script src="{{asset('assets/frontend/index/wap/js/zepto.js')}}"></script>
 <script>
     //点击获得服务
@@ -72,6 +73,28 @@
         $(this).addClass("xuanzhong").removeClass("weixuanzhong");
         $(this).parent().siblings().find("span").addClass("weixuanzhong").removeClass("xuanzhong");
     })
+    function pay() {
+       // window.location="{{url('order/mobile_payment')}}";
+        $.ajax({
+            type: 'POST',
+            url: '{{url("order/mobile_order")}}',
+            dataType: 'json',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(data){
+                if(data['static'] == 200){
+                    window.location="{{url('order/mobile_payment')}}"+'?order_number='+data['order_number'];
+                }else{
+                    layer.open({
+                        content: data['message']
+                        ,skin: 'msg'
+                        ,time: 2 //2秒后自动关闭
+                    });
+                }
+            }
+        });
+    }
 </script>
 </body>
 </html>

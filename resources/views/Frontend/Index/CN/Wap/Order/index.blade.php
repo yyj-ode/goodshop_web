@@ -11,10 +11,10 @@
     </script>
 </head>--}}
 
-@include('Frontend.Index.CN.wap.Layout.doctype')
+@include('Frontend.Index.CN.Wap.Layout.doctype')
 <body>
 <div class="order">
-@include('Frontend.Index.CN.wap.Layout.header')
+@include('Frontend.Index.CN.Wap.Layout.header')
     <!--<div class="headhead"></div>-->
     <div class="keepCon">
         <ul class="shop_list">
@@ -228,7 +228,7 @@
         </div>
     </div>
 </div>
-@include('Frontend.Index.CN.wap.Layout.footer')
+@include('Frontend.Index.CN.Wap.Layout.footer')
 <!--引入或许需要更改-->
 <!--<script src="js/index.js"></script>-->
 </body>

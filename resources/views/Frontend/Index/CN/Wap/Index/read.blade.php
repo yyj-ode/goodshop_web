@@ -1,4 +1,4 @@
-@include('Frontend.Index.CN.wap.Layout.doctype')
+@include('Frontend.Index.CN.Wap.Layout.doctype')
 <style>
     .myread{
         position: absolute;
@@ -188,7 +188,7 @@
 </style>
 <body>
 <div class="myread">
-@include('Frontend.Index.CN.wap.Layout.header')
+@include('Frontend.Index.CN.Wap.Layout.header')
     <!--<div class="headhead"></div>-->
     <div class="myread_content">
         <h4>店址订阅</h4>
@@ -677,7 +677,7 @@
         </div>
     </div>
 </div>
-@include('Frontend.Index.CN.wap.Layout.footer')
+@include('Frontend.Index.CN.Wap.Layout.footer')
     <script>
 //        //订阅选框~~~~~~~~~~
 //        //一级
