@@ -164,8 +164,14 @@
             </div>
             <div class="footxx">
                 <div class="footsc">
-                    <i></i>
-                    <span>收藏</span>
+                    @if($collection_status == 1)
+                        <i class="marBgt"></i>
+                        <span style="margin-right: 0.3rem">已收藏</span>
+                    @else
+                        <i></i>
+                        <span>收藏</span>
+                    @endif
+
                 </div>
                 <a href="{{url('index/live')}}"><div class="footkc">
                         <i></i>
