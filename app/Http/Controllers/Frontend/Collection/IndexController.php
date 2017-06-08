@@ -47,74 +47,75 @@ class IndexController extends FrontendController
      */
     public function index(Request $request)
     {
+        //判断是否登录，没登录则跳转到首页
+        $user_login = $this->check_user();
+        if(!$user_login){
+            return redirect('/');
+        }
+
+        //配置页码信息
+        $current_page = intval($request->get('page',1));
+        if($current_page<1){
+            $current_page = 1;
+        }
+        $offset = ($current_page - 1) * 6;
+
+        //获取用户id
+        $user_info = session('USER_DATA');
+        $user_id = $user_info['id'];
+
+        //查询收藏数据（带分页）
+        $model = new Collection();
+        $collect = $model::getAllCollectionDataById($user_id,$offset);
+
+        //把结果集中的店铺信息列表部分，分装为$data数组
+        $data = [];
+        foreach($collect['result'] as $k => $v){
+            $data[] = $v['shopline'];
+        }
+
+        //计算总页数
+        $pages = intval(ceil($collect['count']/6));
+
+        //为店铺列表信息部分添加程序和商圈信息
+        foreach($data as $k => $v){
+            $city = Area::where('id',$data[$k]['city'])->first();
+            $data[$k]['city'] = $city['name'];
+            $county = Area::where('id',$data[$k]['county'])->first();
+            $data[$k]['county'] = $county['name'];
+        }
+
+        //添加头部订阅信息
+        $subscribe = $this->subscribe(); //订阅
+
+        //把页码信息封装为数组$pages_show
+        $pages_show = $this->showpage($current_page,$pages);
+
+        //配置下一页和上一页的信息
+        $next_page = $current_page + 1;
+        if($next_page > $pages){
+            $next_page = $pages;
+        }
+        $last_page = $current_page - 1;
+        if($last_page < 1){
+            $last_page = 1;
+        }
+
+        //查询周边建筑
+        foreach($data as $k => $v){
+            $kilometer = 1;//距离该店铺周边多少千米范围内
+            $longitude = floatval($v['longitude']);//为确保不报错，经纬度强转为浮点数
+            $latitude = floatval($v['latitude']);//为确保不报错，经纬度强转为浮点数
+            $data[$k]['officebuilding_num'] = SurroundNumStore::getSurroundOfficeBuildingNum($longitude,$latitude,$kilometer);
+            $data[$k]['village_num'] = SurroundNumStore::getSurroundVillageNum($longitude,$latitude,$kilometer);
+            $data[$k]['shoppingcenter_num'] = SurroundNumStore::getSurroundShoppingCentergNum($longitude,$latitude,$kilometer);
+            $data[$k]['shopsurrounding_num'] = SurroundNumStore::getSurroundShopNum($longitude,$latitude,$kilometer);
+        }
         if ($this->is_mobile() == true) {
 
-            return view('Frontend.Index.CN.Wap.Collection.index');
+            return view('Frontend.Index.CN.Wap.Collection.index',compact('data','pages_show','subscribe','next_page','last_page','user_login','current_page'));
         } else {
-            //判断是否登录，没登录则跳转到首页
-            $user_login = $this->check_user();
-            if(!$user_login){
-                return redirect('/');
-            }
 
-            //配置页码信息
-            $current_page = intval($request->get('page',1));
-            if($current_page<1){
-                $current_page = 1;
-            }
-            $offset = ($current_page - 1) * 6;
-
-            //获取用户id
-            $user_info = session('USER_DATA');
-            $user_id = $user_info['id'];
-
-            //查询收藏数据（带分页）
-            $model = new Collection();
-            $collect = $model::getAllCollectionDataById($user_id,$offset);
-
-            //把结果集中的店铺信息列表部分，分装为$data数组
-            $data = [];
-            foreach($collect['result'] as $k => $v){
-                $data[] = $v['shopline'];
-            }
-
-            //计算总页数
-            $pages = intval(ceil($collect['count']/6));
-
-            //为店铺列表信息部分添加程序和商圈信息
-            foreach($data as $k => $v){
-                $city = Area::where('id',$data[$k]['city'])->first();
-                $data[$k]['city'] = $city['name'];
-                $county = Area::where('id',$data[$k]['county'])->first();
-                $data[$k]['county'] = $county['name'];
-            }
-
-            //添加头部订阅信息
-            $subscribe = $this->subscribe(); //订阅
-
-            //把页码信息封装为数组$pages_show
-            $pages_show = $this->showpage($current_page,$pages);
-
-            //配置下一页和上一页的信息
-            $next_page = $current_page + 1;
-            if($next_page > $pages){
-                $next_page = $pages;
-            }
-            $last_page = $current_page - 1;
-            if($last_page < 1){
-                $last_page = 1;
-            }
-
-            //查询周边建筑
-            foreach($data as $k => $v){
-                $kilometer = 1;//距离该店铺周边多少千米范围内
-                $longitude = floatval($v['longitude']);//为确保不报错，经纬度强转为浮点数
-                $latitude = floatval($v['latitude']);//为确保不报错，经纬度强转为浮点数
-                $data[$k]['officebuilding_num'] = SurroundNumStore::getSurroundOfficeBuildingNum($longitude,$latitude,$kilometer);
-                $data[$k]['village_num'] = SurroundNumStore::getSurroundVillageNum($longitude,$latitude,$kilometer);
-                $data[$k]['shoppingcenter_num'] = SurroundNumStore::getSurroundShoppingCentergNum($longitude,$latitude,$kilometer);
-                $data[$k]['shopsurrounding_num'] = SurroundNumStore::getSurroundShopNum($longitude,$latitude,$kilometer);
-            }
 
             return view('Frontend.Index.CN.Web.Collection.index',compact('data','pages_show','subscribe','next_page','last_page','user_login','current_page'));
         }

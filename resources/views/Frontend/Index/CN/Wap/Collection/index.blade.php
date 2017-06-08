@@ -15,9 +15,9 @@
                         <div class="detail_mess">
                             <p>
                                 <span class="mess_class">区域类型：</span>
-                                <span class="mess_kind">生活社区- 高端</span>
+                                <span class="mess_kind">暂无数据</span>
                             </p>
-                            <p class="mess_people mess_peo">客流：<i>20万+</i></p>
+                            <p class="mess_people mess_peo">客流：<i>分析中</i></p>
                             <p class="mess_people">商业街店铺</p>
                             <p class="mess_mon">
                                 <span class="mess_area">200<i>㎡</i></span>

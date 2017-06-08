@@ -268,7 +268,7 @@
         </div>
         <!--<div class="headhead"></div>-->
         <div class="my_content">
-            <a href="collect.html"><div class="my_collect _my">
+            <a href="{{url('collection/index')}}"><div class="my_collect _my">
                 <span></span><em>我的收藏</em>
                 <i></i>
             </div></a>
