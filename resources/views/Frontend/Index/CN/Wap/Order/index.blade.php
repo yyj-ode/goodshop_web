@@ -13,9 +13,9 @@
 
 @include('Frontend.Index.CN.Wap.Layout.doctype')
 <body>
-<div class="order">
+<div class="order con">
 @include('Frontend.Index.CN.Wap.Layout.header')
-    <!--<div class="headhead"></div>-->
+    <div class="headhead"></div>
     <div class="keepCon">
         <ul class="shop_list">
             <a href="detail.html">
@@ -228,6 +228,7 @@
         </div>
     </div>
 </div>
+@include('Frontend.Index.CN.Wap.Layout.login')
 @include('Frontend.Index.CN.Wap.Layout.footer')
 <!--引入或许需要更改-->
 <!--<script src="js/index.js"></script>-->

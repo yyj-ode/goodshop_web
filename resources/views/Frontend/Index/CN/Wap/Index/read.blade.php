@@ -189,8 +189,8 @@
 <body>
 <div class="myread">
 @include('Frontend.Index.CN.Wap.Layout.header')
-    <!--<div class="headhead"></div>-->
-    <div class="myread_content">
+    <div class="headhead"></div>
+    <div class="myread_content con">
         <h4>店址订阅</h4>
         <div class="shop_mess">
             <h6>实时获得最精确的店址推荐</h6>
@@ -676,6 +676,7 @@
             <div class="readNow">立即订阅</div>
         </div>
     </div>
+    @include('Frontend.Index.CN.Wap.Layout.login')
 </div>
 @include('Frontend.Index.CN.Wap.Layout.footer')
     <script>

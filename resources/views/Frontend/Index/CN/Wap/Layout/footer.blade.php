@@ -10,28 +10,32 @@
 <script src="{{asset('assets/frontend/index/wap/js/index.js')}}" type="text/javascript"></script>
 
 <script>
+
+    document.querySelector("html").style.fontSize = document.documentElement.clientWidth/375*50+"px";
+    var u = navigator.userAgent;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+
+    if(isiOS == true){
+        console.log(1);
+        $(".headhead").hide();
+        $(".head").addClass("headIos");
+    }else{
+        console.log(0);
+        $(".head").addClass("headAndr");
+    }
+
     //---------------------登录-------------------//
-//    //点击小人登录
-//    $(".head").on("click",".head ._user",function(){
-//        $(".login_page").removeClass("none");
-//        $(".con").addClass("none");
-////        $(this).css({"zIndex":"0"});
-//    });
-//    //登录后点击小人  !!!!!!!!!wode????????
-//    $(".head").on("click",".user_login",function(){
-//        $(".mine").removeClass("none");
-//        $(".con").addClass("none");
-//    });
-//    $(".head").on("click",".head .wode",function(){
-//        $(".mine").removeClass("none");
-//        $(".con").addClass("none");
-//    });
     //登录返回
     $(".login_page").on("click",".login_page .coordinate",function(){
         $(".login_page").addClass("none");
         $(".con").removeClass("none");
     });
-
+    //个人中心头部返回
+    $(".mine").on("click",".mine .head .coordinate",function(){
+        $(".mine").addClass("none");
+        $(".con").removeClass("none");
+    });
     //点击协议
     $(".login_content .registerForm").on("click",".registerForm p a",function(){
         $(".agreement").removeClass("none");
@@ -47,6 +51,18 @@
     $(".head").on("click","._user",function(){
         $(".mask").removeClass("none");
     });
+    //登录 点击小人
+    /*$('#login_user').on('click',function () {
+        $(".mine").removeClass("none");
+        $(".con").addClass("none");
+        $(".login_page").addClass("none");
+    });
+    //没登录点    击小人
+    $('#login_none').on('click',function () {
+        $(".login_page").removeClass("none");
+        $(".con").addClass("none");
+        $(".mine").addClass("none");
+    });*/
     //取消登录
     $(".login").on("click",".btn_one",function(){
         $(".mask").addClass("none");
@@ -57,36 +73,56 @@
     });
 
     {{-- 判断是否登录 --}}
-    $.ajax({
-        type: 'GET',
-        url: '{{url("user/check")}}',
-        dataType: 'json',
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        success: function(data){
-            if(data.status == 200){
-                //$('.head ._user').css({"zIndex":"0"});
-                $(".head").on("click",".head ._user",function(){
+    $('#login_user').on('click',function () {
+        $.ajax({
+            type: 'GET',
+            url: '{{url("user/check")}}',
+            dataType: 'json',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(data){
+                if(data.status == 200){
                     $(".mine").removeClass("none");
                     $(".con").addClass("none");
                     $(".login_page").addClass("none");
-                });
+                }
+                if(data.status == 500){
+                    $(".login_page").removeClass("none");
+                    $(".con").addClass("none");
+                    $(".mine").addClass("none");
+                }
+            },
+            error: function(xhr, type){
+                alert('Ajax error!');
             }
-            if(data.status == 500){
-                $(".head").on("click",".head ._user",function(){
-                $(".login_page").removeClass("none");
-                $(".con").addClass("none");
-                $(".mine").addClass("none");
-                });
-               // $('.head .wode').css({"zIndex":"0"});
-            }
-        },
-        error: function(xhr, type){
-            alert('Ajax error!');
-        }
+        });
     });
-
+    {{-- 退出 --}}
+$('#userLogout').on('click',function () {
+        $.ajax({
+            type: 'GET',
+            url: '{{url("user/ajaxLogout")}}',
+            dataType: 'json',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(data){
+                if(data.status == 200){
+                    $(".mine").addClass("none");
+                    $(".con").removeClass("none");
+                    layer.open({
+                        content: '退出成功'
+                        ,skin: 'msg'
+                        ,time: 2 //2秒后自动关闭
+                    });
+                }
+            },
+            error: function(xhr, type){
+                alert('Ajax error!')
+            }
+        });
+    });
     {{-- 登录 --}}
     $('#userLogin').on('click',function () {
         $.ajax({
@@ -99,11 +135,15 @@
             },
             success: function(data){
                 if(data.status == 200){
-                    $(".con").removeClass("none");
-//                    $(".mine").removeClass("none");
-                    $(".login_page").addClass("none");
+                    layer.open({
+                        content: '登录成功'
+                        ,skin: 'msg'
+                        ,time: 2 //2秒后自动关闭
+                    });
 
-//                    $('.head .wode').css({"zIndex":"0"});
+                   $(".con").removeClass("none");
+                   $(".login_page").addClass("none");
+                   $('.user_type').attr('id','user_login');
                 }else{
                     layer.open({
                         content: data.message
@@ -118,59 +158,49 @@
         });
     });
 
-//    验证码
-    $(".phoneNumber input").blur(function () {
-        var phone = $(".phoneNumber input").val()
-        if(!(/^1[34578]\d{9}$/.test(phone))){
-            alert("手机号码有误，请重填");
-            return false;
-        }else {
-            //------------------发送验证码-------------------
-            $(".verifica").on("click",".send",function(){
-                $.ajax({
-                    type: 'POST',
-                    url: "{{url("index/send_tel")}}",
-                    data: { mobile : phone},
-                    dataType: 'json',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function(data){
-                        layer.open({
-                            content: data.message
-                            ,skin: 'msg'
-                            ,time: 2 //2秒后自动关闭
-                        });
-
-                        if(data.status == 1){
-                            var send_html=$(".send").html();
-                            var sed_num=60;
-                            var judge=true;  //此变量解决点击连续点击 触发多次事件问题
-                            if(judge){
-                                judge=false;
-                                $(".send").html(sed_num+"s");
-                                if(send_html=="发送验证码"){
-                                    var setInt = setInterval(function(){
-                                        if(sed_num==1){
-                                            $(".send").html("重新获取");
-                                            //judge = true;
-                                            sed_num=60;
-                                            judge=true;
-                                            clearInterval(setInt);
-                                        }else{
-                                            sed_num--;
-                                            $(".send").html(sed_num+"s");
-                                        }
-                                    },1000);
-                                }
-                            }
-                        }
-                    },
-                    error: function(xhr, type){
-                    }
+    //发送验证码
+    $('#send').on('click',function () {
+        var phone = $(".phoneNumber input").val();
+        $.ajax({
+            type: 'POST',
+            url: "{{url("index/send_tel")}}",
+            data: { mobile : phone},
+            dataType: 'json',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(data){
+                layer.open({
+                    content: data.message
+                    ,skin: 'msg'
+                    ,time: 2 //2秒后自动关闭
                 });
-            });
+                if(data.status == 1){
+                    var send_html=$("#send").html();
+                    var sed_num=60;
+                    var judge=true;  //此变量解决点击连续点击 触发多次事件问题
+                    if(judge){
+                        judge=false;
+                        $("#send").html(sed_num+"s");
+                        if(send_html=="发送验证码"){
+                            var setInt = setInterval(function(){
+                                if(sed_num==1){
+                                    $("#send").html("重新获取");
+                                    sed_num=60;
+                                    judge=true;
+                                    clearInterval(setInt);
+                                }else{
+                                    sed_num--;
+                                    $("#send").html(sed_num+"s");
+                                }
+                            },1000);
 
-        }
+                        };
+                    }
+                }
+            },
+            error: function(xhr, type){
+            }
+        });
     });
 </script>
