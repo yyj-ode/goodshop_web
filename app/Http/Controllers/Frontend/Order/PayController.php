@@ -46,7 +46,8 @@ class PayController extends FrontendController
             'SSLCERT_PATH' => '/app/Library/Vendor/Wxpay/jsapi/cacert/apiclient_cert.pem',        // 证书路径,注意应该填写绝对路径
             'SSLKEY_PATH' => '/app/Library/Vendor/Wxpay/jsapi/cacert/apiclient_key.pem',          // 证书路径,注意应该填写绝对路径
             'CURL_TIMEOUT' => 30,
-            'NOTIFYURL' =>'http://www.xuanpu100.com/order/notify_url'
+            'NOTIFYURL' =>env('APP_URL').'order/notify_url/'
+            /*  'NOTIFYURL' =>'http://www.xuanpu100.com/order/notify_url/'*/
         );
         /* $this->wxpayConfig['APPID'] = 'wx29c4db473ac5eee7';      // 微信公众号身份的唯一标识
          $this->wxpayConfig['APPSECRET'] = 'bb5895a3097988954e6c638005386e70'; // JSAPI接口中获取openid
@@ -122,7 +123,7 @@ class PayController extends FrontendController
         $out_trade_no = $order_number; //自定义订单号，此处仅作举例
         $unifiedOrder->setParameter("out_trade_no","$out_trade_no");//商户订单号
         $unifiedOrder->setParameter("total_fee",2);//总金额
-        $url='http://www.xuanpu100.com/order/notify_url/';
+        $url=env('APP_URL').'order/notify_url/';
         /* $url='http://www.xuanpu100.com/notify_url/';*/
         $unifiedOrder->setParameter("notify_url",$url);//通知地址
         $unifiedOrder->setParameter("trade_type","NATIVE");//交易类型
@@ -169,17 +170,17 @@ class PayController extends FrontendController
     //移动订单入库
     public function mobile_order(){
         //判断是否登录
-        /*$user_login=$this->check_user();
+        $user_login=$this->check_user();
         if(!$user_login){
             $data['static'] = 100;  // 用户没有登录
             $data['message'] = '请您先登录';  // 成功
             return response()->json($data);
-        }*/
+        }
         //订单入库
         $shop_id = Session::get('session_detail_id');
         if(!$shop_id){
             $data['static'] = 400;  // 用户没有登录
-            $data['message'] = '您勘查的商铺不存在';  // 成功
+            $data['message'] = '请您重新选择要勘察的商铺';  // 成功
             return response()->json($data);
         }
         $shop = ShopLine::where('id',$shop_id)->first();
@@ -230,7 +231,7 @@ class PayController extends FrontendController
         // 通过code获得openid
         if (!isset($_GET['code'])) {
             // 触发微信返回code码
-            $url = $jsApi->createOauthUrlForCode('http://www.xuanpu100.com/order/mobile_payment/?order_number='.$order_number);
+            $url = $jsApi->createOauthUrlForCode(env('APP_URL').'order/mobile_payment/?order_number='.$order_number);
             /*Header("Location: " . $url);*/
             return redirect($url);
         } else {
@@ -248,7 +249,10 @@ class PayController extends FrontendController
         $unifiedOrder->setParameter("out_trade_no", $out_trade_no);              // 商户订单号
         $unifiedOrder->setParameter("total_fee", $payprice * 100);               // 总金额
         $unifiedOrder->setParameter("notify_url", \WxPayConf_pub::$NOTIFY_URL);  // 通知地址
-        $unifiedOrder->setParameter("trade_type", "JSAPI");                      // 交易类型
+        $unifiedOrder->setParameter("trade_type", "JSAPI");
+        $url=env('APP_URL').'order/notify_url/';
+        /* $url='http://www.xuanpu100.com/notify_url/';*/
+        $unifiedOrder->setParameter("notify_url",$url);//通知地址// 交易类型
         $prepay_id = $unifiedOrder->getPrepayId();
         // 3,使用jsapi调起支付
         $jsApi = new \JsApi_pub();
@@ -260,7 +264,6 @@ class PayController extends FrontendController
 
     public function notify_url(Request $request)
     {
-
         //使用通用通知接口
         $notify = new \Notify_pub();
         //存储微信的回调

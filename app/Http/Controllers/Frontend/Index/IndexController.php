@@ -86,12 +86,7 @@ class IndexController extends FrontendController
         }
 
     }
-    //获得市县
-    public function city_county($city,$county){
-        $city = Area::where('id',$city)->first();
-        $county = Area::where('id',$county)->first();
-        return $city->name.'-'.$county->name;
-    }
+
     public function com_map(){
         $session_map = Session::get('MAP');
         if($session_map){

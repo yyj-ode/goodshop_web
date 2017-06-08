@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Auth;
+use App\Models\Area;
 use App\Models\Subscription;
 use Session;
 use Illuminate\Http\Request;
@@ -40,5 +41,11 @@ class FrontendController extends Controller
         $data['format'] = $subscriptionModel::getCategoryData();
         $data['area_level'] = $subscriptionModel::getDistrictData();
         return $data;
+    }
+    //获得市县
+    public function city_county($city,$county){
+        $city = Area::where('id',$city)->first();
+        $county = Area::where('id',$county)->first();
+        return $city->name.'-'.$county->name;
     }
 }

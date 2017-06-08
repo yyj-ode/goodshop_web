@@ -49,11 +49,11 @@
                     <em>微信支付</em>
                     <span val="wx"></span>
                 </div>
-                <div class="pay_zfb">
-                    <i></i>
-                    <em>支付宝支付</em>
-                    <span val="zfb"></span>
-                </div>
+                {{--<div class="pay_zfb">--}}
+                    {{--<i></i>--}}
+                    {{--<em>支付宝支付</em>--}}
+                    {{--<span val="zfb"></span>--}}
+                {{--</div>--}}
                 <div class="payNow" onclick="pay()">去支付</div>
             </div>
         </div>

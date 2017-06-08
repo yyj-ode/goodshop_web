@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\Order;
 
 
 use App\Models\Banner;
+use App\Models\Format;
 use App\Store\SurroundNumStore;
 use App\Models\Area;
 use App\Models\BannerSort;
@@ -33,7 +34,35 @@ class IndexController extends FrontendController
     public function index(Request $request)
     { 
         if ($this->is_mobile() == true) {
-            return view('Frontend.Index.CN.Wap.Order.index');
+            //判断是否登录，没登录则跳转到首页
+            $user_login=$this->check_user();
+            if(!$user_login){
+                return redirect('/');
+            }
+            //获取用户id
+            $user_info = session('USER_DATA');
+            $user_id = $user_info['id'];
+
+            //获取勘察状态
+            $status = $this->status();
+            $data = ShopLine::orderBy('id', 'desc')->skip(0)->take(12)->get()->toArray();
+            foreach ($data as $k=>$v){
+                $data[$k]['location'] = msubstr($v['location'],0,17);
+
+                $format_type  = Format::where('id',$v['business_type'])->first();
+                $data[$k]['business_type'] = $format_type['name'];
+                $kilometer = 1;//距离该店铺周边多少千米范围内
+                $longitude = floatval($v['longitude']);//为确保不报错，经纬度强转为浮点数
+                $latitude = floatval($v['latitude']);//为确保不报错，经纬度强转为浮点数
+                $data[$k]['officebuilding_num'] = SurroundNumStore::getSurroundOfficeBuildingNum($longitude,$latitude,$kilometer);
+                $data[$k]['village_num'] = SurroundNumStore::getSurroundVillageNum($longitude,$latitude,$kilometer);
+                $data[$k]['shoppingcenter_num'] = SurroundNumStore::getSurroundShoppingCentergNum($longitude,$latitude,$kilometer);
+                $data[$k]['shopsurrounding_num'] = SurroundNumStore::getSurroundShopNum($longitude,$latitude,$kilometer);
+                $data[$k]['city_county'] = $this->city_county($v['city'],$v['county']);
+            }
+
+
+            return view('Frontend.Index.CN.Wap.Order.index',compact('data'));
         } else {
             //判断是否登录，没登录则跳转到首页
             $user_login=$this->check_user();

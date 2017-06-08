@@ -67,5 +67,9 @@ class Order extends BaseModel
         $order = ['result'=>$result,'count'=>$count];
         return $order;
     }
+    public static function getXdOrder($id){
+        $result = self::with('shopline')->where('user_id','=',"$id")->where('status','<','5')->orderBy('id','desc')->get()->toArray();
+        return $result;
+    }
 
 }

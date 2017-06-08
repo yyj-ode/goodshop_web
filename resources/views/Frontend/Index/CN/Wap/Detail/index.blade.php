@@ -12,10 +12,10 @@
     </script>
 </head>
 <body>--}}
-@include('Frontend.Index.CN.wap.Layout.doctype')
+@include('Frontend.Index.CN.Wap.Layout.doctype')
 <div class="detail con">
 
-@include('Frontend.Index.CN.wap.Layout.header')
+@include('Frontend.Index.CN.Wap.Layout.header')
   <div class="headhead"></div>
     <div class="detail_pic">
         <div class="swiper-container">
@@ -309,7 +309,7 @@
 
 <input type="hidden" id="longitude" value="{{$data['longitude']}}">
 <input type="hidden" id="latitude" value="{{$data['latitude']}}">
-@include('Frontend.Index.CN.wap.Layout.footer')
+@include('Frontend.Index.CN.Wap.Layout.footer')
 <script>
     //-------------  详情页  --------------//
     //调取高德地图，根据经纬度定位
