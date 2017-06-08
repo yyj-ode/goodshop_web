@@ -390,5 +390,9 @@ class MyshopController extends FrontendController
         $this->Lepu_image(570);
     }
 
+    public function demo_pupuwang(){
+
+    }
+
 
 }
