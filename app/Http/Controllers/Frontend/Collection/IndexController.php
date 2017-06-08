@@ -126,9 +126,40 @@ class IndexController extends FrontendController
      */
     public function moredata(Request $request)
     {
-        $start = 6;//接收从前台传过来的数据
-        $start += 6;
-        $data = ShopInformation::orderBy('_id', 'desc')->skip($start)->take(6)->get();
+        //接收从前台传过来的数据
+        $offset = $request->get('start',0);
+        $offset = intval($offset);
+        //获取用户id
+        $user_info = session('USER_DATA');
+        $user_id = $user_info['id'];
+        //查询收藏数据（带分页）
+        $model = new Collection();
+        $collect = $model::getAllCollectionDataById($user_id,$offset);
+        //把结果集中的店铺信息列表部分，分装为$data数组
+        $data = [];
+        foreach($collect['result'] as $k => $v){
+            $data[] = $v['shopline'];
+        }
+        //为店铺列表信息部分添加程序和商圈信息,处理图片信息，和添加收藏时间
+        foreach($data as $k => $v){
+            $city = Area::where('id',$data[$k]['city'])->first();
+            $data[$k]['city'] = $city['name'];
+            $county = Area::where('id',$data[$k]['county'])->first();
+            $data[$k]['county'] = $county['name'];
+            $data[$k]['our_image'] = asset(strExplode($v['our_image']));
+            $data[$k]['updated_at'] = timeShow($v['updated_at']);
+        }
+        //查询周边建筑
+        foreach($data as $k => $v){
+            $kilometer = 1;//距离该店铺周边多少千米范围内
+            $longitude = floatval($v['longitude']);//为确保不报错，经纬度强转为浮点数
+            $latitude = floatval($v['latitude']);//为确保不报错，经纬度强转为浮点数
+            $data[$k]['officebuilding_num'] = SurroundNumStore::getSurroundOfficeBuildingNum($longitude,$latitude,$kilometer);
+            $data[$k]['village_num'] = SurroundNumStore::getSurroundVillageNum($longitude,$latitude,$kilometer);
+            $data[$k]['shoppingcenter_num'] = SurroundNumStore::getSurroundShoppingCentergNum($longitude,$latitude,$kilometer);
+            $data[$k]['shopsurrounding_num'] = SurroundNumStore::getSurroundShopNum($longitude,$latitude,$kilometer);
+        }
+
 //        dd($data);
         return response()->json($data);
     }
