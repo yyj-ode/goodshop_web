@@ -19,20 +19,18 @@
     <div class="keepCon con">
         <ul class="shop_list">
             @foreach($data as $key => $value)
-                <a href="{{url('detail/index').'?id='.$value['id']}}" class="shop_data">
+                <a href="detail.html">
                     <li class="list_detail">
                         <div class="img">
                             <img src="{{asset(strExplode($value['our_image']))}}">
                         </div>
                         <div class="detail_mess">
                             <p>
-                                {{--<span class="mess_class">区域类型：</span>
-                                <span class="mess_kind">生活社区- 高端</span>--}}
-                                <span class="mess_class">商铺类型：</span>
-                                <span class="mess_kind">生活社区- 高端</span>
+                                <span class="mess_class">区域类型：</span>
+                                <span class="mess_kind">暂无数据</span>
                             </p>
-                            <p class="mess_people mess_peo">客流：<i>20万+</i></p>
-                            <p class="mess_people">{{$value['business_type']}}</p>
+                            <p class="mess_people mess_peo">客流：<i>评估中</i></p>
+                            <p class="mess_people">暂无数据</p>
                             <p class="mess_mon">
                                 <span class="mess_area">{{$value['total_area']}}<i>㎡</i></span>
                                 <span class="mess_money">{{$value['rent']}}<i class="mess_each">元/月</i></span>
@@ -41,13 +39,17 @@
                         <div class="detail_near">
                             <div class="detail_addr">
                                 <i></i>
-                                <span>{{$value['city_county']}}</span>
+                                <span>{{$value['city']}}-{{$value['county']}}</span>
                             </div>
                             <ul class="detail_ul">
-                                <li class="near">写字楼{{$value['officebuilding_num']}}</li>
-                                <li class="near">小区{{$value['village_num']}}</li>
-                                <li class="near">商铺{{$value['shopsurrounding_num']}}</li>
+                                <span class="near">写字楼{{$value['officebuilding_num']}}</span>
+                                <span class="near">小区{{$value['village_num']}}</span>
+                                <span class="near">购物中心{{$value['shoppingcenter_num']}}</span>
                             </ul>
+                        </div>
+                        <div class="keep_time">
+                            <p>申请于{{timeShow($value['created_at'])}}</p>
+                            <p class="keep_already">{{$value['order_status']}}</p>
                         </div>
                     </li>
                 </a>
@@ -89,7 +91,7 @@
 
         </ul>
         <div class="keep_bottom">
-            {{--<div class="keep_foot">查看更多</div>--}}
+            <div class="keep_foot">查看更多</div>
         </div>
     </div>
 </div>
@@ -100,5 +102,46 @@
 @include('Frontend.Index.CN.Wap.Layout.footer')
 <!--引入或许需要更改-->
 <!--<script src="js/index.js"></script>-->
+<script>
+    //        加载更多
+    $('.keep_bottom').on('click',function(){
+        layer.open({
+            content: '正在加载中...'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+        });
+        var start = $('.shop_list a').length;
+        var map = {'start':start};
+        content(map);
+    });
+    //ajax获取房源信息
+    function content(map) {
+        $.ajax({
+            type: 'POST',
+            url: '{{url("order/moredata")}}',
+            data:map,
+            dataType: 'json',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(data){
+                var html = '';
+                $.each(data, function(k, v){
+                    html += '<a href="{{url('detail/index')}}?id='+v['id']+'">';
+                    html += '<li class="list_detail"><div class="img"><img src="'+v.our_image+'">';
+                    html += '</div><div class="detail_mess"><p><span class="mess_class">区域类型：</span>';
+                    html += '<span class="mess_kind">暂无数据</span></p><p class="mess_people mess_peo">客流：<i>分析中</i></p>';
+                    html += '<p class="mess_people">暂无数据</p><p class="mess_mon"><span class="mess_area">'+v.total_area+'<i>㎡</i></span>';
+                    html += '<span class="mess_money">'+v.rent+'<i class="mess_each">元/月</i></span>';
+                    html += '</p></div><div class="detail_near"><div class="detail_addr"><i></i>';
+                    html += '<span>'+v.city+'-'+v.county+'</span></div> <ul class="detail_ul"><li class="near">写字楼'+v.officebuilding_num+'</li>';
+                    html += '<li class="near">小区'+v.village_num+'</li> <li class="near">购物中心'+v.shoppingcenter_num+'</li> </ul></div>'
+                    html += '<div class="keep_time">申请于'+v.created_at+'<p class="keep_already">'+v.order_status+'</p></div></li></a>';
+                });
+                $('.shop_list').append(html);
+            }
+        });
+    }
+</script>
 </body>
 </html>

@@ -8,4 +8,5 @@ Route::group(['namespace' => 'Frontend\Order',  'prefix' => 'order'], function (
     Route::get('success', 'PayController@success');
     Route::post('check_pay', 'PayController@check_pay');
     Route::get('index', 'IndexController@index');
+    Route::post('moredata', 'IndexController@moredata');
 });
