@@ -116,6 +116,7 @@ $('#userLogout').on('click',function () {
                         ,skin: 'msg'
                         ,time: 2 //2秒后自动关闭
                     });
+                    window.location="{{url('/')}}";
                 }
             },
             error: function(xhr, type){
