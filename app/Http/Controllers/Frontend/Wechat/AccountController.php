@@ -189,7 +189,7 @@ class AccountController extends FrontendController
         curl_close($ch);
         $userinfo = json_decode($res,true);
 //        dd($userinfo);
-        $param = ['wechat_openid' => $userinfo['openId']];
+        $param = ['wechat_openid' => $userinfo['openid']];
         if (!empty($userinfo)) {
             $checkOpenId = User::checkData($param);
             if ($checkOpenId == false) {
