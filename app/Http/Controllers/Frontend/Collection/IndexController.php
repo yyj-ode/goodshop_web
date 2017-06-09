@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\Collection;
 
 use App\Collect\UserCollection;
 use App\Models\Area;
+use App\Models\Format;
 use App\Models\Collection;
 use App\Models\Banner;
 use App\Models\BannerSort;
@@ -77,12 +78,14 @@ class IndexController extends FrontendController
         //计算总页数
         $pages = intval(ceil($collect['count']/6));
 
-        //为店铺列表信息部分添加程序和商圈信息
+        //为店铺列表信息部分添加城区，商圈，店铺类型信息
         foreach($data as $k => $v){
             $city = Area::where('id',$data[$k]['city'])->first();
             $data[$k]['city'] = $city['name'];
             $county = Area::where('id',$data[$k]['county'])->first();
             $data[$k]['county'] = $county['name'];
+            $format = Format::where('id',$data[$k]['business_type'])->first();
+            $data[$k]['business_type'] = $format['name'];
         }
 
         //添加头部订阅信息
@@ -111,6 +114,8 @@ class IndexController extends FrontendController
             $data[$k]['shoppingcenter_num'] = SurroundNumStore::getSurroundShoppingCentergNum($longitude,$latitude,$kilometer);
             $data[$k]['shopsurrounding_num'] = SurroundNumStore::getSurroundShopNum($longitude,$latitude,$kilometer);
         }
+
+//        dd($data);
         if ($this->is_mobile() == true) {
 
             return view('Frontend.Index.CN.Wap.Collection.index',compact('data','pages_show','subscribe','next_page','last_page','user_login','current_page'));
@@ -145,7 +150,7 @@ class IndexController extends FrontendController
         foreach($collect['result'] as $k => $v){
             $data[] = $v['shopline'];
         }
-        //为店铺列表信息部分添加程序和商圈信息,处理图片信息，和添加收藏时间
+        //为店铺列表信息部分添加程序和商圈信息,处理图片信息，商铺类型，添加收藏时间
         foreach($data as $k => $v){
             $city = Area::where('id',$data[$k]['city'])->first();
             $data[$k]['city'] = $city['name'];
@@ -153,6 +158,8 @@ class IndexController extends FrontendController
             $data[$k]['county'] = $county['name'];
             $data[$k]['our_image'] = asset(strExplode($v['our_image']));
             $data[$k]['updated_at'] = timeShow($v['updated_at']);
+            $format = Format::where('id',$data[$k]['business_type'])->first();
+            $data[$k]['business_type'] = $format['name'];
         }
         //查询周边建筑
         foreach($data as $k => $v){
@@ -192,10 +199,8 @@ class IndexController extends FrontendController
             $res = $collectionModel::addData($collectionModel,$data);
             if($res){
                 return response()->json('收藏成功');
-
             }else{
                 return response()->json('收藏失败');
-
             }
         }else{
             return response()->json('您尚未登录');

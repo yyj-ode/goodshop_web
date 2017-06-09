@@ -19,7 +19,7 @@
     <div class="keepCon con">
         <ul class="shop_list">
             @foreach($data as $key => $value)
-                <a href="detail.html">
+                <a href="{{url('detail/index')}}?id={{$value['id']}}">
                     <li class="list_detail">
                         <div class="img">
                             <img src="{{asset(strExplode($value['our_image']))}}">
@@ -30,7 +30,7 @@
                                 <span class="mess_kind">暂无数据</span>
                             </p>
                             <p class="mess_people mess_peo">客流：<i>评估中</i></p>
-                            <p class="mess_people">暂无数据</p>
+                            <p class="mess_people">{{$value['business_type']}}</p>
                             <p class="mess_mon">
                                 <span class="mess_area">{{$value['total_area']}}<i>㎡</i></span>
                                 <span class="mess_money">{{$value['rent']}}<i class="mess_each">元/月</i></span>
@@ -132,7 +132,7 @@
                         html += '<li class="list_detail"><div class="img"><img src="'+v.our_image+'">';
                         html += '</div><div class="detail_mess"><p><span class="mess_class">区域类型：</span>';
                         html += '<span class="mess_kind">暂无数据</span></p><p class="mess_people mess_peo">客流：<i>分析中</i></p>';
-                        html += '<p class="mess_people">暂无数据</p><p class="mess_mon"><span class="mess_area">'+v.total_area+'<i>㎡</i></span>';
+                        html += '<p class="mess_people">'+v.business_type+'</p><p class="mess_mon"><span class="mess_area">'+v.total_area+'<i>㎡</i></span>';
                         html += '<span class="mess_money">'+v.rent+'<i class="mess_each">元/月</i></span>';
                         html += '</p></div><div class="detail_near"><div class="detail_addr"><i></i>';
                         html += '<span>'+v.city+'-'+v.county+'</span></div> <ul class="detail_ul"><li class="near">写字楼'+v.officebuilding_num+'</li>';

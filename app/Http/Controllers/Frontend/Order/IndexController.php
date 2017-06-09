@@ -67,12 +67,14 @@ class IndexController extends FrontendController
         //计算总页数
         $pages = intval(ceil($user_order_2['count']/6));
 
-        //为店铺列表信息部分添加程序和商圈信息
+        //为店铺列表信息部分添加程序和商圈信息,添加商铺类型
         foreach($data as $k => $v){
             $city = Area::where('id',$data[$k]['city'])->first();
             $data[$k]['city'] = $city['name'];
             $county = Area::where('id',$data[$k]['county'])->first();
             $data[$k]['county'] = $county['name'];
+            $format = Format::where('id',$data[$k]['business_type'])->first();
+            $data[$k]['business_type'] = $format['name'];
         }
 
         //添加头部订阅信息
@@ -177,7 +179,7 @@ class IndexController extends FrontendController
             $data[$k]['order_status'] = $v['status'];
         }
 
-        //为店铺列表信息部分添加程序和商圈信息,处理图片信息，和添加收藏时间
+        //为店铺列表信息部分添加程序和商圈信息,处理图片信息，和添加收藏时间，添加商铺类型
         foreach($data as $k => $v){
             $city = Area::where('id',$data[$k]['city'])->first();
             $data[$k]['city'] = $city['name'];
@@ -185,6 +187,8 @@ class IndexController extends FrontendController
             $data[$k]['county'] = $county['name'];
             $data[$k]['our_image'] = asset(strExplode($v['our_image']));
             $data[$k]['created_at'] = timeShow($v['created_at']);
+            $format = Format::where('id',$data[$k]['business_type'])->first();
+            $data[$k]['business_type'] = $format['name'];
         }
 
         //查询周边建筑
