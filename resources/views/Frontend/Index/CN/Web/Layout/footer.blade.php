@@ -239,8 +239,9 @@ $.ajax({
         });
     });
 $(".login_text img").click(function(){
-    $(".login").addClass("none");
-    $(".wxlogin").removeClass("none");
+//    $(".login").addClass("none");
+//    $(".wxlogin").removeClass("none");
+    $(location).attr('href', '{{url('account/wxlogin')}}');
 });
 $(".btn_one1").click(function(){
     $(".wxlogin").addClass("none");

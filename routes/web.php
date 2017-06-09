@@ -24,6 +24,8 @@ Route::get('/collection/delete', 'Frontend\Collection\IndexController@delete');
 Route::get('/collection/create', 'Frontend\Collection\IndexController@create');*/
 
 Route::get('/demo/index', 'Frontend\Demo\IndexController@index');
+Route::get('/account/wxlogin', 'Frontend\Wechat\AccountController@wxlogin');
+Route::get('/account/wxcode', 'Frontend\Wechat\AccountController@wxcode');
 /*Route::get('/subscribe/index', 'Frontend\Subscribe\IndexController@index');
 Route::get('/subscribe/create', 'Frontend\Subscribe\IndexController@create');*/
 

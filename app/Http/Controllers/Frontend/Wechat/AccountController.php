@@ -158,8 +158,65 @@ class AccountController extends FrontendController
          * die();
          **/
     }
+
+    //以下部分为元永健写的测试代码，没有用就全删掉
     public function wxlogin(){
-        $url = "https://open.weixin.qq.com/connect/qrconnect?appid=wx973d59ef6e30eddb&redirect_uri=www.xuanpu100.com/%2Fwechat%2Faccount%2Fregister&response_type=code&scope=snsapi_login&state=STATE#wechat_redirect";
-        $il = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx973d59ef6e30eddb&redirect_uri=http%3A%2F%2Fwww.xuanpu100.com%2Fwechat%2Faccount%2Fregister&response_type=code&scope=snsapi_login&state=7d491f800ce67f44a5bc97ef26cbb536&connect_redirect=1#wechat_redirect';
+        $url = "https://open.weixin.qq.com/connect/qrconnect?appid=wx973d59ef6e30eddb&redirect_uri=http%3A%2F%2Fwww.xuanpu100.com%2Faccount%2Fwxcode&response_type=code&scope=snsapi_login&state=STATE#wechat_redirect";
+        Header("location:$url");
+    }
+
+    public function wxcode(){
+        $code = $_GET['code'];
+        $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx973d59ef6e30eddb&secret=9b6634d0ab657fd606f0f9333e69da78&code=$code&grant_type=authorization_code";
+        $get_token_url = $url;
+        $ch = curl_init();
+        curl_setopt($ch,CURLOPT_URL,$get_token_url);
+        curl_setopt($ch,CURLOPT_HEADER,0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1 );
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+        $res = curl_exec($ch);
+        curl_close($ch);
+        $json_obj = json_decode($res,true);
+        $access_token = $json_obj['access_token'];
+        $openid = $json_obj['openid'];
+        $url2 = "https://api.weixin.qq.com/sns/userinfo?access_token=$access_token&openid=$openid";
+        $ch = curl_init();
+        curl_setopt($ch,CURLOPT_URL,$url2);
+        curl_setopt($ch,CURLOPT_HEADER,0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1 );
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+        $res = curl_exec($ch);
+        curl_close($ch);
+        $userinfo = json_decode($res,true);
+//        dd($userinfo);
+        $param = ['wechat_openid' => $userinfo['openId']];
+        if (!empty($userinfo)) {
+            $checkOpenId = User::checkData($param);
+            if ($checkOpenId == false) {
+                $addData = [
+                    'wechat_openid' => $userinfo['openid'],
+                    'nickname' => $userinfo['nickname'],
+                    'name' => $userinfo['nickname'],
+                    'avatar' => $userinfo['headimgurl'],
+                    'province' => $userinfo['province'],
+                    'city' => $userinfo['city'],
+                    'sex' => $userinfo['sex'],
+                ];
+                User::addData($addData);
+            }
+
+            $userData = User::getOneData($param);
+            $result = ['id' => $userData->id, 'name' => $userData->name];
+            Session::put('USER_DATA', $result);
+
+
+            if (Session::exists('REDIRECT_BACK')) {
+                return Session::get('REDIRECT_BACK');
+            } else {
+                /* return redirect('wechat/account/index');*/
+                return redirect('/');
+            }
+        }
+
     }
 }
