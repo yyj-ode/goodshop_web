@@ -188,6 +188,35 @@ class AccountController extends FrontendController
         $res = curl_exec($ch);
         curl_close($ch);
         $userinfo = json_decode($res,true);
-        dd($userinfo);
+//        dd($userinfo);
+        $param = ['wechat_openid' => $userinfo['openId']];
+        if (!empty($userinfo)) {
+            $checkOpenId = User::checkData($param);
+            if ($checkOpenId == false) {
+                $addData = [
+                    'wechat_openid' => $userinfo['openid'],
+                    'nickname' => $userinfo['nickname'],
+                    'name' => $userinfo['nickname'],
+                    'avatar' => $userinfo['headimgurl'],
+                    'province' => $userinfo['province'],
+                    'city' => $userinfo['city'],
+                    'sex' => $userinfo['sex'],
+                ];
+                User::addData($addData);
+            }
+
+            $userData = User::getOneData($param);
+            $result = ['id' => $userData->id, 'name' => $userData->name];
+            Session::put('USER_DATA', $result);
+
+
+            if (Session::exists('REDIRECT_BACK')) {
+                return Session::get('REDIRECT_BACK');
+            } else {
+                /* return redirect('wechat/account/index');*/
+                return redirect('/');
+            }
+        }
+
     }
 }
