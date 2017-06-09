@@ -18,7 +18,7 @@ use App\Models\ShopLine;
 use Session;
 use Illuminate\Http\Request;
 use App\Http\Controllers\FrontendController;
-use Response;
+/*use Response;*/
 use Cookie;
 use Uuid;
 use App\Models\Sms;
@@ -26,6 +26,7 @@ use Validator;
 use App\Library\CreateQueueAndSendMessage;
 use App\Store\SurroundNumStore;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Response;
 
 
 /***测试采集****/
@@ -56,6 +57,9 @@ class IndexController extends FrontendController
             $totalarea = $this->getTotalareaData();
             $format= $this->getCategoryData();
             $area_level = $this->getDistrictData();
+            //关键词查询历史记录
+            $session_key = Session::get('session_key');
+            if($session_key){array_unique($session_key);}
 
 
             //搜索条件
@@ -81,11 +85,25 @@ class IndexController extends FrontendController
                 $data[$k]['city_county'] = $this->city_county($v['city'],$v['county']);
             }
         if ($this->is_mobile() == true){
-            return view('Frontend.Index.CN.Wap.Index.index',compact('data','user_login','price','totalarea','format','area_level','subscribe'));
+            return view('Frontend.Index.CN.Wap.Index.index',compact('data','user_login','price','totalarea','format','area_level','subscribe','session_key'));
         }else{
             return view('Frontend.Index.CN.Web.Index.index', compact('data','user_login','price','totalarea','format','area_level','subscribe'));
         }
 
+    }
+    public function put_session_key($value){
+            $session_key = Session::get('session_key');
+            if($session_key){
+                $count = count($session_key);
+                if($count<6){
+                    array_unshift($session_key,$value);
+                    array_unique($session_key);
+                    Session::put('session_key',$session_key);
+            }
+            }else{
+                $data[] = $value;
+                Session::put('session_key',$data);
+            }
     }
 
     public function com_map(){
@@ -270,6 +288,10 @@ class IndexController extends FrontendController
             $max_area = $request->get('max_area',99999999); //面积
             $min_rent = $request->get('min_rent',0)*10000;
             $max_rent = $request->get('max_rent',99999999)*10000;
+
+            if($key){
+                $this->put_session_key($key);
+            }
 
             //可经营业态
             if($this->com_map()){

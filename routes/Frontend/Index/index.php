@@ -1,5 +1,9 @@
 <?php
-Route::get('/', 'Frontend\Index\IndexController@index');
+use Illuminate\Http\Request;
+Route::get('/', 'Frontend\Index\IndexController@index',function (Request $request){
+    $cookie = cookie('name', 'value', time()+10000000);
+    return Request('Hello World')->cookie($cookie);
+});
 Route::group(['namespace' => 'Frontend\Index',  'prefix' => 'index'], function () {
     Route::post('shop_search', 'IndexController@shop_search');
     Route::post('management_search', 'IndexController@management_search');

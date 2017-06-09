@@ -209,8 +209,11 @@
         <div class="search_content">
             <h4>历史搜索</h4>
             <div class="search_detail">
-                <a href="###"><span class="search_one">南锣鼓巷</span></a>
-                <a href="###"><span class="search_two">西单大悦城</span></a>
+                @if($session_key)
+                @foreach($session_key as $v)
+                <a href="###" onclick="key_search('{{$v}}')"><span class="search_two">{{$v}}</span></a>
+                @endforeach
+                @endif
             </div>
         </div>
     </div>
@@ -257,8 +260,12 @@
         content(map,'more');
     });
     //关键词搜索
-    function key_search() {
-        var key = $('#search_content').val();
+    function key_search($history) {
+        if($history){
+            var key = $history;
+        }else{
+            var key = $('#search_content').val();
+        }
         var shop_area = $('#shop_area').val();
         var business_type = $('#shop_type').val();
         var min_area = $('#min_area').val();
