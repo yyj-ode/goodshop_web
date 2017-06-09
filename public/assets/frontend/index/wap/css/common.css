@@ -129,7 +129,7 @@ body{
 }
 /*----------------商品列表-------------*/
 .shop_list{
-    padding:0 0.42rem;
+    padding:0 0.3rem 0;
 }
 .shop_list .list_detail{
     padding-top: 0.42rem;

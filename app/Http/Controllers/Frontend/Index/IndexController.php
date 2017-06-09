@@ -359,7 +359,8 @@ class IndexController extends FrontendController
     //手机站订阅
     public function read(){
         if ($this->is_mobile() == true) {
-            return view('Frontend.Index.CN.Wap.Index.read');
+            $subscribe = $this->subscribe(); //订阅和登录
+            return view('Frontend.Index.CN.Wap.Index.read',compact('subscribe'));
         } else {
 
         }
@@ -629,5 +630,6 @@ class IndexController extends FrontendController
         }
         return response()->json($result);
     }
+
 
 }

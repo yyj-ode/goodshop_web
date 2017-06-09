@@ -191,106 +191,13 @@ $.ajax({
         $(this).parent().parent().addClass("none");
 
         var val = $(this).attr('countyid');
-        $('#subscribe_totalarea_id').attr('value',val);
+        $('#subscribe_region_id').attr('value',val);
     });
     //鼠标移出
     $(".kuang,.list").mouseleave(function(e){
         $(this).addClass("none");
     });
-//    $(document).on("click",".first .erji li",function(){
-//        $(this).parent().parent().parent().find(".shop_choice1").find("i").html($(this).text());
-//        $(this).parent().parent().addClass("none");
-//
-//    });
 
-    //
-//    //订阅选框~~~~~~~~~~
-//    //一级
-//    $(document).on("click",".shop_choice",function(){
-//        $(".kuang").addClass("none");
-//        $(this).find(".kuang").removeClass("none");
-//    });
-//    //点击选中显示
-//    $(document).on("click",".kuang>ul>li",function(){
-//        $(this).parent().parent().parent().find("input").val(($(this).text()));
-//        $(this).parent().parent().css({"display":"none"});
-//    });
-//
-//    // 鼠标划过出现二级联动
-//    $(".list .all>li").mouseenter(function(e){
-//        $(".list>.erji").removeClass("none");
-//        $(".list .erji").html($(this).find("ul").html());
-//
-//    });
-//    //点击选中显示  选择开店区域-商圈
-//    $(document).on("click",".list .erji li",function(){
-//        //$(".domain i").text(($(this).text()));
-//        $(this).parent().parent().parent().find("input").val(($(this).text()));
-//        $(this).parent().parent().css({"display":"none"});
-////        var region_id = $(this).attr('countyid');
-////        $('#subscribe_region_id').val(region_id);
-////        alert(region_id);
-//    });
-
-
-    //选择经营类型传值
-//    $('body > div.read > div > div.shop_mess > div:nth-child(2) > div > ul > li').on('click',function(){
-//        var subscribe_management_class = $(this).attr('val');
-//        $('#subscribe_management_class').val(subscribe_management_class);
-//    });
-
-    //选择商铺类型传值
-//    $('body > div.read > div > div.shop_mess > div:nth-child(3) > div > ul > li').on('click',function(){
-//        var subscribe_format_id = $(this).attr('val');
-//        $('#subscribe_format_id').val(subscribe_format_id);
-//    });
-
-
-
-    //选择开店区域-城区
-//    $('body > div.read > div > div.shop_mess > div:nth-child(4) > div > ul > li').on('click',function(){
-//        var region_id = $(this).attr('cityid');
-//        $('#subscribe_region_id').val(region_id);
-//    });
-
-//    //选择开店区域-商圈－－－－－－－－－－为什么他么拿不到这个元素！！！！！！！！？？？？？？？？
-//    $(document).on("click","body > div.read > div > div.shop_mess > div.shop_choice._choice > div > ul > li > ul > li",function(){
-//        alert(1);
-//        var subscribe_county = $(this).attr('countyid');
-//        $('#subscribe_county').val(subscribe_county);
-//    });
-
-    //选择经营面积传值
-//    $('body > div.read > div > div.shop_mess > div:nth-child(5) > div > ul > li').on('click',function(){
-//        var subscribe_totalarea_id = $(this).attr('id');
-//        $('#subscribe_totalarea_id').val(subscribe_totalarea_id);
-//    });
-
-    //选择开店预算传值
-//    $('body > div.read > div > div.shop_mess > div:nth-child(6) > div > ul > li').on('click',function(){
-//        var subscribe_price_id = $(this).attr('id');
-//        $('#subscribe_price_id').val(subscribe_price_id);
-//    });
-
-
-//    //鼠标移出
-//    $(".kuang").mouseleave(function(e){
-//        $(this).addClass("none");
-//    });
-
-
-//    // 鼠标划过出现二级联动
-//    $(".list .all>li").mouseenter(function(e){
-//        $(".list>.erji").removeClass("none");
-//        $(".list .erji").html($(this).find("ul").html());
-//    });
-//    //点击选中显示
-//    $(document).on("click",".list .erji li",function(){
-//        //$(".domain i").text(($(this).text()));
-//        $(this).parent().parent().parent().find("input").val(($(this).text()));
-//        $(this).parent().parent().addClass("none");
-//
-//    });
 
     {{-- 立即订阅 --}}
     $('body > div.read > div > div.shop_mess > div.readNow').on('click',function(){
@@ -300,6 +207,7 @@ $.ajax({
     var subscribe_format_id = $('#subscribe_format_id').val();
     //获取开店区域－城区/商圈
     var subscribe_region_id = $('#subscribe_region_id').val();
+
     //获取经营面积
     var subscribe_totalarea_id = $('#subscribe_totalarea_id').val();
     //获取开店预算
@@ -317,9 +225,13 @@ $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url:'{{url('subscribe/create')}}',
+            url:'{{url('Subscribe/create')}}',
             success:function(data){
-                alert(data);
+                $(".read").addClass("none");
+                layui.use('layer', function(){
+                    var layer = layui.layer;
+                    layer.msg(data);
+                });
             },
             error:function(){
                 alert('发送失败');

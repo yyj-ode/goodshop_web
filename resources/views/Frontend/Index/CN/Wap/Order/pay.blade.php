@@ -14,7 +14,7 @@
                 <?php echo $jsApiParameters; ?>,
                 function(res){
                     if(res.err_msg.indexOf('ok')>0){ // 支付成功后的返回ok
-                        window.location.href='http://www.xuanpu100.com/order/index'; //返回的地址(php分配)
+                        window.location.href='http://www.xuanpu100.com/order/success'; //返回的地址(php分配)
                     }
                     /*WeixinJSBridge.log(res.err_msg);
                      alert(res.err_code+res.err_desc+res.err_msg);*/

@@ -3,4 +3,5 @@ Route::group(['namespace' => 'Frontend\Wechat', 'middleware' => ['web', 'wechat.
     Route::any('account/login', 'AccountController@login');
     Route::any('account/index', 'AccountController@index');
     Route::any('account/register', 'AccountController@register');
+    Route::any('login', 'WxLoginController@login');
 });

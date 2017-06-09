@@ -83,12 +83,11 @@
                 <div class="none list">
                     <div class="erji none"></div>
                     <ul class="all">
-                        <li>全部
+                        {{--<li>全部
                             <ul class="aa none">
-                              {{--  <li class="bac">返回上一级</li>--}}
                                 <li>全部</li>
                             </ul>
-                        </li>
+                        </li>--}}
                         @foreach($subscribe['area_level']['area_level2'] as $k2 => $v2)
                             <li cityid="{{$v2['id']}}">{{$v2['name']}}
                                 <ul class="aa none">
@@ -96,7 +95,7 @@
                                         @if($k2 == $k3)
                                             {{--<li class="bac">返回上一级</li>--}}
                                             @foreach($v3 as $k4 => $v4)
-                                                <li type="subscribe_totalarea_id" countyid="{{$v4['id']}}">{{$v4['name']}}</li>
+                                                <li type="subscribe_region_id" countyid="{{$v4['id']}}">{{$v4['name']}}</li>
                                             @endforeach
                                         @endif
                                     @endforeach
@@ -114,7 +113,7 @@
                 <div class="kuang none">
                     <ul>
                         @foreach($subscribe['totalarea'] as $value)
-                            <li type="subscribe_price_id" val="{{$value['id']}}" id="{{$value['id']}}" min_area="{{$value['min_area']}}" max_area="{{$value['max_area']}}">{{$value['string']}}㎡</li>
+                            <li type="subscribe_totalarea_id" val="{{$value['id']}}" id="{{$value['id']}}" min_area="{{$value['min_area']}}" max_area="{{$value['max_area']}}">{{$value['string']}}㎡</li>
                         @endforeach
                     </ul>
                 </div>
@@ -127,7 +126,7 @@
                 <div class="kuang none">
                     <ul>
                         @foreach($subscribe['price'] as $value)
-                            <li type="subscribe_region_id" val="{{$value['id']}}" id="{{$value['id']}}" min_price="{{$value['min_price']}}" max_price="{{$value['max_price']}}">{{$value['string']}}㎡</li>
+                            <li type="subscribe_price_id" val="{{$value['id']}}" id="{{$value['id']}}" min_price="{{$value['min_price']}}" max_price="{{$value['max_price']}}">{{$value['string']}}㎡</li>
                         @endforeach
                     </ul>
                 </div>

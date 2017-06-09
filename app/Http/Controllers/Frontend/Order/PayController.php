@@ -334,10 +334,13 @@ class PayController extends FrontendController
         if(!$user_login){
             return redirect('/');
         }
-
-
         $subscribe = $this->subscribe(); //订阅
-        return view('Frontend.Index.CN.Web.Order.success',compact('subscribe','user_login'));
+
+        if($this->is_mobile() == true){
+            return view('Frontend.Index.CN.Wap.Order.success');
+        }else{
+            return view('Frontend.Index.CN.Web.Order.success',compact('subscribe','user_login'));
+        }
     }
 
 }
