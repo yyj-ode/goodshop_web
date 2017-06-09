@@ -157,7 +157,7 @@
                 </a>
             </div>
             <div class="free_read">
-                <a href="read.blade.php">
+                <a href="{{url('index/read')}}">
                     <i></i>
                     <span>免费订阅店址</span>
                 </a>

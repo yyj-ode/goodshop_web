@@ -27,5 +27,7 @@ Route::group(['namespace' => 'Frontend\Index',  'prefix' => 'index'], function (
     Route::post('moredata', 'IndexController@moredata');
 
     Route::post('shop', 'IndexController@shop');
+    Route::post('read', 'IndexController@read');
+    Route::any('wxlogin', 'IndexController@wxlogin');
 
 });

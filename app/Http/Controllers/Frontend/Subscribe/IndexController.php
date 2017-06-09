@@ -49,6 +49,7 @@ class IndexController extends FrontendController
         if(!$user_info){
             return response()->json('请您先登录，然后发起订阅');
         }
+        $subscribeModel = new Subscription();
         $data = [];
         $data['user_id'] = $user_info['id'];
         $data['format_id'] = $request->get('format_id',null);
@@ -71,13 +72,22 @@ class IndexController extends FrontendController
         }else{
             return response()->json('未知错误');
         }
-        $subscribeModel = new Subscription();
-        $res = Subscription::addData($subscribeModel,$data);
+
+        //判断用户是否订阅
+        $user_id = $this->get_user_id();
+        $res = $subscribeModel->where('user_id',$user_id)->first();
+
         if($res){
+            //修改
+            $result =  Subscription::updateData($subscribeModel,$res->id,$data);
+        }else{
+            //增加
+            $result = Subscription::addData($subscribeModel,$data);
+        }
+        if($result){
             return response()->json('订阅成功');
         }else{
             return response()->json('订阅失败');
         }
-
     }
 }

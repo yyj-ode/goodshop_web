@@ -92,6 +92,10 @@
                         ,skin: 'msg'
                         ,time: 2 //2秒后自动关闭
                     });
+                    $(".login_page").removeClass("none");
+                    $(".con").addClass("none");
+                    $(".mine").addClass("none");
+
                 }
             }
         });

@@ -48,4 +48,13 @@ class FrontendController extends Controller
         $county = Area::where('id',$county)->first();
         return $city->name.'-'.$county->name;
     }
+    public function get_user_id(){
+        $result = Session::get('USER_DATA');
+        if (!empty($result)) {
+            $result = $result['id'];
+        } else {
+            $result = false;
+        }
+        return $result;
+    }
 }

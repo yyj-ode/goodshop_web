@@ -26,7 +26,7 @@
             </div>
             <div class="xuanze">
                 <a href="{{url("order/index")}}"><p>查看订单</p></a>
-                <a href="http://web.nndeal.app"><p>继续选铺</p></a>
+                <a href="{{url("/")}}"><p>继续选铺</p></a>
             </div>
         </div>
     </div>
