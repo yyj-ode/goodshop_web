@@ -34,7 +34,7 @@
                             <h4>区域类型：<i>正在评估中</i></h4>
                             <div class="keliu">
                                 <span>客流:<i>评估中</i></span>
-                                <span class="aa">写字楼配套</span>
+                                <span class="aa">{{$v['business_type']}}</span>
                                 <em class="aa">{{$v['total_area']}}㎡</em>
                             </div>
                             <div class="jiage"><i>{{$v['rent']}}</i>元/月</div>

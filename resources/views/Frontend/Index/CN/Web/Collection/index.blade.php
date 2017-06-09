@@ -34,7 +34,7 @@
                                 <h4>区域类型：<i>暂无数据</i></h4>
                                 <div class="keliu">
                                     <span>客流:<i>暂无</i></span>
-                                    <span class="aa">暂无数据</span>
+                                    <span class="aa">{{$value['business_type']}}</span>
                                     <em class="aa">{{$value['total_area']}}㎡</em>
                                 </div>
                                 <div class="jiage"><i>{{intval($value['rent'])}}</i>元/月</div>
