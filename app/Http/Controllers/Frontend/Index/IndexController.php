@@ -56,7 +56,8 @@ class IndexController extends FrontendController
             $totalarea = $this->getTotalareaData();
             $format= $this->getCategoryData();
             $area_level = $this->getDistrictData();
-            $i = Area::where('id',11)->select('name');
+
+
             //搜索条件
             if($this->com_map()){
                 $map[]=$this->com_map();
@@ -245,6 +246,12 @@ class IndexController extends FrontendController
         $res['count'] = $this->count();
         $res['map_count'] = ShopLine::where($map)->orderBy('updated_at', 'desc')->skip(0)->take(12)->count();
         return response()->json($res);
+    }
+    //搜索条件存储cookie
+    public function save_key($val){
+        $user_info = array('name'=>'laravel','age'=>12);
+        $user = Cookie::make('user',$user_info,30);
+        return Response::make()->withCookie($user);
     }
     /**
      * 点击更多加载

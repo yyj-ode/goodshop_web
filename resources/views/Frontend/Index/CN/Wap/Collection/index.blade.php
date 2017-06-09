@@ -74,20 +74,29 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(data){
-                    var html = '';
-                    $.each(data, function(k, v){
-                        html += '<a href="{{url('detail/index')}}?id='+v['id']+'">';
-                        html += '<li class="list_detail"><div class="img"><img src="'+v.our_image+'">';
-                        html += '</div><div class="detail_mess"><p><span class="mess_class">区域类型：</span>';
-                        html += '<span class="mess_kind">暂无数据</span></p><p class="mess_people mess_peo">客流：<i>分析中</i></p>';
-                        html += '<p class="mess_people">暂无数据</p><p class="mess_mon"><span class="mess_area">'+v.total_area+'<i>㎡</i></span>';
-                        html += '<span class="mess_money">'+v.rent+'<i class="mess_each">元/月</i></span>';
-                        html += '</p></div><div class="detail_near"><div class="detail_addr"><i></i>';
-                        html += '<span>'+v.city+'-'+v.county+'</span></div> <ul class="detail_ul"><li class="near">写字楼'+v.officebuilding_num+'</li>';
-                        html += '<li class="near">小区'+v.village_num+'</li> <li class="near">商铺'+v.shopsurrounding_num+'</li> </ul></div>'
-                        html += '<div class="keep_time">收藏于'+v.updated_at+'</div></li></a>';
-                    });
-                    $('.shop_list').append(html);
+                    if(data.message == 200){
+                        var html = '';
+                        $.each(data.content, function(k, v){
+                            html += '<a href="{{url('detail/index')}}?id='+v['id']+'">';
+                            html += '<li class="list_detail"><div class="img"><img src="'+v.our_image+'">';
+                            html += '</div><div class="detail_mess"><p><span class="mess_class">区域类型：</span>';
+                            html += '<span class="mess_kind">暂无数据</span></p><p class="mess_people mess_peo">客流：<i>分析中</i></p>';
+                            html += '<p class="mess_people">暂无数据</p><p class="mess_mon"><span class="mess_area">'+v.total_area+'<i>㎡</i></span>';
+                            html += '<span class="mess_money">'+v.rent+'<i class="mess_each">元/月</i></span>';
+                            html += '</p></div><div class="detail_near"><div class="detail_addr"><i></i>';
+                            html += '<span>'+v.city+'-'+v.county+'</span></div> <ul class="detail_ul"><li class="near">写字楼'+v.officebuilding_num+'</li>';
+                            html += '<li class="near">小区'+v.village_num+'</li> <li class="near">商铺'+v.shopsurrounding_num+'</li> </ul></div>'
+                            html += '<div class="keep_time">收藏于'+v.updated_at+'</div></li></a>';
+                        });
+                        $('.shop_list').append(html);
+                    }else{
+                        layer.open({
+                            content: data.message
+                            ,skin: 'msg'
+                            ,time: 2 //2秒后自动关闭
+                        });
+                    }
+
                 }
             });
         }

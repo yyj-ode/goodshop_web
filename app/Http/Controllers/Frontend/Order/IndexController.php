@@ -163,6 +163,12 @@ class IndexController extends FrontendController
 
         //查询订阅数据（带分页）
         $user_order_2 = Order::getAllOrderDataById($user_id,$offset);
+        if(!$user_order_2['result']){
+            $res['success'] = '400';
+            $res['message'] = '没有更多数据了...';
+            return response()->json($res);
+        }
+
 
         //把结果集中的店铺信息列表部分，分装为$data数组
         $data = [];
@@ -197,7 +203,10 @@ class IndexController extends FrontendController
         }
 
 
-        return response()->json($data);
+
+        $res['success'] = '200';
+        $res['content'] = $data;
+        return response()->json($res);
     }
 
     /**
