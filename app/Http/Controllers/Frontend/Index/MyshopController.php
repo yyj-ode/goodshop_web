@@ -6,6 +6,7 @@ use App\Collect\LePuPhoto;
 use App\Http\Requests\Request;
 use App\Models\Area;
 use App\Models\Format;
+use Illuminate\Support\Facades\DB;
 use App\Models\ShoplinePhoto;
 use App\Store\ElemeStore;
 use App\Models\WashData;
@@ -14,6 +15,7 @@ use App\Models\BannerSort;
 use App\Models\DiseaseCategory;
 use App\Models\ShopLine;
 use App\Http\Controllers\FrontendController;
+use App\Store\ShoppingCenterStore;
 use Response;
 use Cookie;
 use Uuid;
@@ -48,7 +50,7 @@ class MyshopController extends FrontendController
         $mode = new LePu();
 //        dd($mode);
         $data_original = $mode::offset(0)->limit(10)->get()->toArray();
-//        dd($data_original);
+        dd($data_original);
         $result = ['status' => 'error', 'message' => '数据请求失败！', 'status_code' => '404'];
         foreach ($data_original as $v){
             $ShopLine = new ShopLine();
@@ -393,7 +395,7 @@ class MyshopController extends FrontendController
     }
 
     public function demo_eleme(){
-        $ElemeModel = new LePu();
+        $ElemeModel = new Eleme();
         $data_original = $ElemeModel::offset(0)->limit(10)->get()->toArray();
         dd($data_original);
     }
