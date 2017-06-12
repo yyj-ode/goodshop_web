@@ -323,7 +323,7 @@
     var latitude = $('#latitude').val();
     var map = new AMap.Map('container',{
         resizeEnable: true,
-        zoom: 10,
+        zoom: 13,
         center: [longitude, latitude],
         mapStyle:'amap://styles/d6bf8c1d69cea9f5c696185ad4ac4c86'
     });

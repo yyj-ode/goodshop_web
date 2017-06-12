@@ -90,9 +90,11 @@
             </a>--}}
 
         </ul>
-        <div class="keep_bottom">
-            <div class="keep_foot">查看更多</div>
-        </div>
+        @if($data)
+            <div class="keep_bottom">
+                <div class="keep_foot">查看更多</div>
+            </div>
+        @endif
     </div>
 </div>
 <!--登录页  用户协议  个人中心-->
