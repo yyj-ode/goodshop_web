@@ -7,6 +7,7 @@ use App\Http\Requests\Request;
 use App\Models\Area;
 use App\Models\Format;
 use App\Models\ShoplinePhoto;
+use App\Store\ElemeStore;
 use App\Models\WashData;
 use App\Models\Banner;
 use App\Models\BannerSort;
@@ -19,10 +20,11 @@ use Uuid;
 use Validator;
 use App\Library\CreateQueueAndSendMessage;
 use App\Models\ImageDown;
+
 //use zgldh\QiniuStorage\QiniuStorage;
 
 /***测试采集****/
-use App\Collect\Dazhongdianping;
+use App\Collect\Eleme;
 use App\Collect\LePu;
 use App\Collect\HaoZu;
 use App\Collect\LianJia;
@@ -46,7 +48,7 @@ class MyshopController extends FrontendController
         $mode = new LePu();
 //        dd($mode);
         $data_original = $mode::offset(0)->limit(10)->get()->toArray();
-        dd($data_original);
+//        dd($data_original);
         $result = ['status' => 'error', 'message' => '数据请求失败！', 'status_code' => '404'];
         foreach ($data_original as $v){
             $ShopLine = new ShopLine();
@@ -390,8 +392,10 @@ class MyshopController extends FrontendController
         $this->Lepu_image(570);
     }
 
-    public function demo_pupuwang(){
-
+    public function demo_eleme(){
+        $ElemeModel = new LePu();
+        $data_original = $ElemeModel::offset(0)->limit(10)->get()->toArray();
+        dd($data_original);
     }
 
 

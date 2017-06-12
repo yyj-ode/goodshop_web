@@ -68,6 +68,7 @@ Route::get('/myshop/lepu_image_17', 'Frontend\Index\MyshopController@Lepu_image_
 Route::get('/myshop/lepu_image_18', 'Frontend\Index\MyshopController@Lepu_image_18');
 Route::get('/myshop/lepu_image_19', 'Frontend\Index\MyshopController@Lepu_image_19');
 Route::get('/myshop/lepu_image_20', 'Frontend\Index\MyshopController@Lepu_image_20');
+Route::get('/myshop/demo_eleme', 'Frontend\Index\MyshopController@demo_eleme');
 
 //李
 //Route::post('/index/shop_search', 'Frontend\Index\IndexController@shop_search');
