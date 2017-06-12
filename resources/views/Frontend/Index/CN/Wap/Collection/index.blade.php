@@ -42,9 +42,11 @@
                 </a>
                 @endforeach
             </ul>
-            <div class="keep_bottom">
-                <div class="keep_foot">查看更多</div>
-            </div>
+            @if($data)
+                <div class="keep_bottom">
+                    <div class="keep_foot">查看更多</div>
+                </div>
+            @endif
         </div>
     </div>
     @include('Frontend.Index.CN.Wap.Layout.login')
